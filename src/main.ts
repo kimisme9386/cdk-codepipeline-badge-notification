@@ -1,10 +1,10 @@
+import * as path from 'path';
 import * as codePipeline from '@aws-cdk/aws-codepipeline';
 import * as targets from '@aws-cdk/aws-events-targets';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
-import * as path from 'path';
 
 export interface Notification {
   /**
@@ -17,15 +17,27 @@ export interface Notification {
   readonly slackWebHookUrl?: string;
 }
 
+export interface GitHubTokenFromSecretsManager {
+  /**
+   * Arn with other type of secrets
+   */
+  readonly secretsManagerArn?: string;
+
+  /**
+   * SecretKey
+   */
+  readonly secretKey?: string;
+}
+
 export interface CodePipelineStatusProps {
   /**
    * AWS CodePipeline arn
    */
   readonly pipelineArn: string;
   /**
-   * GitHub personal token from aws secret manager
+   * AWS Secret Manager id or arn
    */
-  readonly gitHubTokenFromSecretsManager?: string;
+  readonly gitHubTokenFromSecretsManager?: GitHubTokenFromSecretsManager;
   /**
    * Notification
    */
@@ -49,11 +61,16 @@ export class CodePipelineStatus extends cdk.Construct {
       props.pipelineArn
     );
 
-    const gitHubToken = props.gitHubTokenFromSecretsManager
-      ? cdk.SecretValue.secretsManager(
-          props.gitHubTokenFromSecretsManager
-        ).toString()
-      : '';
+    const gitHubToken =
+      props?.gitHubTokenFromSecretsManager?.secretsManagerArn &&
+      props?.gitHubTokenFromSecretsManager?.secretKey
+        ? cdk.SecretValue.secretsManager(
+          props.gitHubTokenFromSecretsManager.secretsManagerArn,
+          {
+            jsonField: props.gitHubTokenFromSecretsManager.secretKey,
+          }
+        )
+        : null;
 
     const targetLambda = this.createCodePipelineEventLambdaFunction(
       pipeline.pipelineName,
@@ -73,7 +90,7 @@ export class CodePipelineStatus extends cdk.Construct {
 
   private createCodePipelineEventLambdaFunction(
     codePipelineName: string,
-    gitHubToken: string,
+    gitHubToken: cdk.SecretValue | null,
     stage: string | undefined,
     slackWebhookURL: string | undefined
   ): lambda.Function {
@@ -113,7 +130,7 @@ export class CodePipelineStatus extends cdk.Construct {
         BADGE_BUCKET_NAME: badgeBucket.bucketName,
         BADGE_BUCKET_IMAGE_KEY_NAME: badgeBucketImageKeyName,
         CODE_PIPELINE_NAME: codePipelineName,
-        GITHUB_PERSONAL_TOKEN: gitHubToken,
+        GITHUB_PERSONAL_TOKEN: gitHubToken ? `${gitHubToken}` : '',
       },
     });
 
