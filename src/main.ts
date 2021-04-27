@@ -6,7 +6,7 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
 import * as path from 'path';
 
-interface CodePipelineBadgeProps {
+interface CodePipelineStatusProps {
   /**
    * AWS CodePipeline arn
    */
@@ -29,8 +29,12 @@ interface Notification {
   slackWebHookUrl?: string;
 }
 
-export class CodePipelineBadge extends cdk.Construct {
-  constructor(scope: cdk.Construct, id: string, props: CodePipelineBadgeProps) {
+export class CodePipelineStatus extends cdk.Construct {
+  constructor(
+    scope: cdk.Construct,
+    id: string,
+    props: CodePipelineStatusProps
+  ) {
     super(scope, id);
 
     const pipeline = codePipeline.Pipeline.fromPipelineArn(
