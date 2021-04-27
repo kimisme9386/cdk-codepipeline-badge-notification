@@ -19,6 +19,7 @@ dependabot.yml
 dist
 images
 junit.xml
+lambda/codepipeline-event/dist
 yarn-error.log
 !.jsii
 !/lib

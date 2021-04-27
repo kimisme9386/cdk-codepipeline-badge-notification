@@ -5,15 +5,21 @@ const { Automation } = require('projen-automate-it');
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
-  author: 'user',
-  authorAddress: 'user@domain.com',
+  author: 'Chris Yang',
+  authorAddress: 'kimisem9386@gmail.com',
   cdkVersion: '1.100.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
-  name: 'projen-template-awscdk-construct',
+  name: 'cdk-pipeline-status',
   describe: '',
   repositoryUrl: 'git@github.com:owner/repo.git',
-  cdkDependencies: ['@aws-cdk/core'],
+  cdkDependencies: [
+    '@aws-cdk/core',
+    '@aws-cdk/aws-codepipeline',
+    '@aws-cdk/aws-lambda',
+    '@aws-cdk/aws-events-targets',
+    '@aws-cdk/aws-s3',
+  ],
   devDeps: ['projen-automate-it'],
   dependabot: false,
   /* AwsCdkConstructLibraryOptions */
@@ -148,6 +154,7 @@ const common_exclude = [
   'images',
   'yarn-error.log',
   'dependabot.yml',
+  'lambda/codepipeline-event/dist',
 ];
 
 project.npmignore.exclude(...common_exclude);
