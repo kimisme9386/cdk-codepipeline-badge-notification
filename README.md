@@ -8,7 +8,7 @@
 
 - Generate badge when AWS CodePipeline state change
 
-- Show GitHub commit status when AWS CodePipeline state change
+- Update GitHub commit status when AWS CodePipeline state change
 
 - Slack notification when AWS CodePipeline state change
 
