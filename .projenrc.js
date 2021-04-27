@@ -26,6 +26,10 @@ const project = new AwsCdkConstructLibrary({
   ],
   devDeps: ['projen-automate-it'],
   dependabot: false,
+  publishToPypi: {
+    distName: 'cdk-pipeline-status',
+    module: 'cdk_pipeline_status',
+  },
 });
 
 project.eslint.addRules({

@@ -124,7 +124,12 @@
   "stability": "stable",
   "jsii": {
     "outdir": "dist",
-    "targets": {},
+    "targets": {
+      "python": {
+        "distName": "cdk-pipeline-status",
+        "module": "cdk_pipeline_status"
+      }
+    },
     "tsc": {
       "outDir": "lib",
       "rootDir": "src"
