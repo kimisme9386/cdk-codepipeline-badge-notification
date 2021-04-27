@@ -46,3 +46,11 @@ new CodePipelineStatus(stack, 'CodePipelineStatus', {
 ```
 
 > gitHubTokenFromSecretsManager and notification is optional
+
+#### Only badge
+
+```ts
+new CodePipelineStatus(stack, 'CodePipelineStatus', {
+  pipelineArn: pipeline.pipelineArn,
+});
+```
