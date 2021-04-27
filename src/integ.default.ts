@@ -28,6 +28,10 @@ export class IntegTesting {
             'arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII',
           secretKey: 'codepipeline/lambda/github-token',
         },
+        notification: {
+          stageName: 'production',
+          slackWebHookUrl: 'slack url webhook',
+        },
       }
     );
 
