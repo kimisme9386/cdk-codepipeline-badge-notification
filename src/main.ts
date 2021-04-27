@@ -6,30 +6,36 @@ import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
 import * as path from 'path';
 
-interface CodePipelineStatusProps {
-  /**
-   * AWS CodePipeline arn
-   */
-  pipelineArn: string;
-  /**
-   * GitHub personal token
-   */
-  gitHubToken?: string;
-  notification?: Notification;
-}
-
-interface Notification {
+export interface Notification {
   /**
    * Prefix title for slack message
    */
-  stageName?: string;
+  readonly stageName?: string;
   /**
    * Slack webhook url
    */
-  slackWebHookUrl?: string;
+  readonly slackWebHookUrl?: string;
+}
+
+export interface CodePipelineStatusProps {
+  /**
+   * AWS CodePipeline arn
+   */
+  readonly pipelineArn: string;
+  /**
+   * GitHub personal token from aws secret manager
+   */
+  readonly gitHubTokenFromSecretsManager?: string;
+  /**
+   * Notification
+   */
+  readonly notification?: Notification;
 }
 
 export class CodePipelineStatus extends cdk.Construct {
+  badgeUrl: string = '';
+  codePipelineLink: string = '';
+
   constructor(
     scope: cdk.Construct,
     id: string,
@@ -43,8 +49,10 @@ export class CodePipelineStatus extends cdk.Construct {
       props.pipelineArn
     );
 
-    const gitHubToken = props.gitHubToken
-      ? cdk.SecretValue.secretsManager(props.gitHubToken).toString()
+    const gitHubToken = props.gitHubTokenFromSecretsManager
+      ? cdk.SecretValue.secretsManager(
+          props.gitHubTokenFromSecretsManager
+        ).toString()
       : '';
 
     const targetLambda = this.createCodePipelineEventLambdaFunction(
@@ -111,8 +119,12 @@ export class CodePipelineStatus extends cdk.Construct {
 
     badgeBucket.grantReadWrite(lambdaFunc);
 
+    const region = cdk.Aws.REGION ?? 'ap-northeast-1';
+    this.badgeUrl = `https://${badgeBucket.bucketName}.s3-ap-northeast-1.amazonaws.com/${badgeBucketImageKeyName}#1`;
+    this.codePipelineLink = `https://${region}.console.aws.amazon.com/codesuite/codepipeline/pipelines/${codePipelineName}/view`;
+
     new cdk.CfnOutput(this, 'badgeMarkdownLink', {
-      value: `[![Build Status](https://${badgeBucket.bucketName}.s3-ap-northeast-1.amazonaws.com/${badgeBucketImageKeyName}#1)](https://ap-northeast-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/${codePipelineName}/view)`,
+      value: `[![Build Status](${this.badgeUrl})](${this.codePipelineLink})`,
     });
 
     lambdaFunc.role?.addManagedPolicy(
