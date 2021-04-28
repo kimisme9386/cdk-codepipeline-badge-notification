@@ -3,6 +3,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: 'true'
+      RELEASE: 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
