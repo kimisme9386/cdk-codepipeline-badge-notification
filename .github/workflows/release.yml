@@ -17,6 +17,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Debug
+        run: whoami    
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
       - name: Anti-tamper check
@@ -51,6 +53,7 @@ jobs:
         run: git diff --ignore-space-at-eol --exit-code
     container:
       image: jsii/superchain
+      options: --user root
   release_npm:
     name: Release to NPM
     needs: release
