@@ -112,8 +112,6 @@ export class CodePipelineStatus extends cdk.Construct {
               'bash',
               '-c',
               [
-                'ls -al /asset-input',
-                'cd /asset-input',
                 'npm install',
                 'npm run build',
                 'cp -r /asset-input/dist /asset-output/',
