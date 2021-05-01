@@ -17,7 +17,7 @@ Name|Description
 
 
 
-## class CodePipelineStatus  <a id="cdk-pipeline-status-codepipelinestatus"></a>
+## class CodePipelineStatus 🔹 <a id="cdk-pipeline-status-codepipelinestatus"></a>
 
 
 
@@ -47,27 +47,12 @@ new CodePipelineStatus(scope: Construct, id: string, props: CodePipelineStatusPr
 
 Name | Type | Description 
 -----|------|-------------
-**badgeUrl** | <code>string</code> | <span></span>
-**codePipelineLink** | <code>string</code> | <span></span>
+**badgeUrl**🔹 | <code>string</code> | <span></span>
+**codePipelineLink**🔹 | <code>string</code> | <span></span>
 
 
 
-## struct CodePipelineStatusProps  <a id="cdk-pipeline-status-codepipelinestatusprops"></a>
-
-
-
-
-
-
-Name | Type | Description 
------|------|-------------
-**pipelineArn** | <code>string</code> | AWS CodePipeline arn.
-**gitHubTokenFromSecretsManager**? | <code>[GitHubTokenFromSecretsManager](#cdk-pipeline-status-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
-**notification**? | <code>[Notification](#cdk-pipeline-status-notification)</code> | Notification.<br/>__*Optional*__
-
-
-
-## struct GitHubTokenFromSecretsManager  <a id="cdk-pipeline-status-githubtokenfromsecretsmanager"></a>
+## struct CodePipelineStatusProps 🔹 <a id="cdk-pipeline-status-codepipelinestatusprops"></a>
 
 
 
@@ -76,12 +61,13 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**secretKey**? | <code>string</code> | SecretKey.<br/>__*Optional*__
-**secretsManagerArn**? | <code>string</code> | Arn with other type of secrets.<br/>__*Optional*__
+**pipelineArn**🔹 | <code>string</code> | AWS CodePipeline arn.
+**gitHubTokenFromSecretsManager**?🔹 | <code>[GitHubTokenFromSecretsManager](#cdk-pipeline-status-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
+**notification**?🔹 | <code>[Notification](#cdk-pipeline-status-notification)</code> | Notification.<br/>__*Optional*__
 
 
 
-## struct Notification  <a id="cdk-pipeline-status-notification"></a>
+## struct GitHubTokenFromSecretsManager 🔹 <a id="cdk-pipeline-status-githubtokenfromsecretsmanager"></a>
 
 
 
@@ -90,8 +76,22 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**slackWebHookUrl**? | <code>string</code> | Slack webhook url.<br/>__*Optional*__
-**stageName**? | <code>string</code> | Prefix title for slack message.<br/>__*Optional*__
+**secretKey**?🔹 | <code>string</code> | SecretKey.<br/>__*Optional*__
+**secretsManagerArn**?🔹 | <code>string</code> | Arn with other type of secrets.<br/>__*Optional*__
+
+
+
+## struct Notification 🔹 <a id="cdk-pipeline-status-notification"></a>
+
+
+
+
+
+
+Name | Type | Description 
+-----|------|-------------
+**slackWebHookUrl**?🔹 | <code>string</code> | Slack webhook url.<br/>__*Optional*__
+**stageName**?🔹 | <code>string</code> | Prefix title for slack message.<br/>__*Optional*__
 
 
 
