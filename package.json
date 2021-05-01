@@ -2,7 +2,7 @@
   "name": "cdk-pipeline-status",
   "repository": {
     "type": "git",
-    "url": "git@github.com:owner/repo.git"
+    "url": "https://github.com/kimisme9386/cdk-codepipeline-status"
   },
   "scripts": {
     "clobber": "npx projen clobber",

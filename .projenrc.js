@@ -11,8 +11,9 @@ const project = new AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'cdk-pipeline-status',
-  describe: '',
-  repositoryUrl: 'git@github.com:owner/repo.git',
+  describe:
+    'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
+  repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-status',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-codepipeline',
