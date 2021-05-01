@@ -247,7 +247,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":connection/XXxxxxxxxxx",
+                    ":connection/XXxxxxxxxxxx",
                   ],
                 ],
               },
@@ -669,7 +669,7 @@ Object {
                         Object {
                           "Ref": "AWS::AccountId",
                         },
-                        ":connection/XXxxxxxxxxx",
+                        ":connection/XXxxxxxxxxxx",
                       ],
                     ],
                   },
@@ -867,7 +867,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":connection/XXxxxxxxxxx",
+                    ":connection/XXxxxxxxxxxx",
                   ],
                 ],
               },

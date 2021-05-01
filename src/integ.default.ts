@@ -62,7 +62,7 @@ export class IntegTesting {
           owner: 'kimisme9386',
           repo: 'cdk-codepipeline-status',
           output: sourceOutput,
-          connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/XXxxxxxxxxx`,
+          connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/XXxxxxxxxxxx`,
           variablesNamespace: 'GitHubSourceVariables',
           branch: 'dev',
           codeBuildCloneOutput: true,
