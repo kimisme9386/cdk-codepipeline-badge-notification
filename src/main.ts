@@ -1,10 +1,10 @@
+import * as path from 'path';
 import * as codePipeline from '@aws-cdk/aws-codepipeline';
 import * as targets from '@aws-cdk/aws-events-targets';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as s3 from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
-import * as path from 'path';
 
 export interface Notification {
   /**
@@ -65,11 +65,11 @@ export class CodePipelineStatus extends cdk.Construct {
       props?.gitHubTokenFromSecretsManager?.secretsManagerArn &&
       props?.gitHubTokenFromSecretsManager?.secretKey
         ? cdk.SecretValue.secretsManager(
-            props.gitHubTokenFromSecretsManager.secretsManagerArn,
-            {
-              jsonField: props.gitHubTokenFromSecretsManager.secretKey,
-            }
-          )
+          props.gitHubTokenFromSecretsManager.secretsManagerArn,
+          {
+            jsonField: props.gitHubTokenFromSecretsManager.secretKey,
+          }
+        )
         : null;
 
     const targetLambda = this.createCodePipelineEventLambdaFunction(
