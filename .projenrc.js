@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
   name: 'cdk-pipeline-status',
   describe:
     'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
-  repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-status',
+  repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-status.git',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-codepipeline',
@@ -31,6 +31,11 @@ const project = new AwsCdkConstructLibrary({
     distName: 'cdk-pipeline-status',
     module: 'cdk_pipeline_status',
   },
+  catalog: {
+    announce: false,
+  },
+  stability: 'experimental',
+  releaseBranches: ['main'],
 });
 
 project.eslint.addRules({
