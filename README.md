@@ -1,5 +1,5 @@
-[![NPM version](https://badge.fury.io/js/cdk-codepipeline-status.svg)](https://badge.fury.io/js/cdk-codepipeline-status)
-[![PyPI version](https://badge.fury.io/py/cdk-codepipeline-status.svg)](https://badge.fury.io/py/cdk-codepipeline-status)
+[![NPM version](https://badge.fury.io/js/cdk-pipeline-status.svg)](https://badge.fury.io/js/cdk-pipeline-status)
+[![PyPI version](https://badge.fury.io/py/cdk-pipeline-status.svg)](https://badge.fury.io/py/cdk-pipeline-status)
 [![Release](https://github.com/kimisme9386/cdk-codepipeline-status/actions/workflows/release.yml/badge.svg)](https://github.com/kimisme9386/cdk-codepipeline-status/actions/workflows/release.yml)
 
 # CDK-CodePipeline-Status
