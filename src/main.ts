@@ -101,38 +101,26 @@ export class CodePipelineStatus extends cdk.Construct {
     const stageKeyName = stage ? `${stage}-` : '';
     const badgeBucketImageKeyName = `${stageKeyName}latest-build.svg`;
 
-    const lambdaFunc = new lambda.Function(this, 'CodepipelineEventLambda', {
-      code: lambda.Code.fromAsset(
-        path.join(__dirname, '../lambda/codepipeline-event'),
-        {
-          bundling: {
-            user: 'root',
-            image: lambda.Runtime.NODEJS_14_X.bundlingImage,
-            command: [
-              'bash',
-              '-c',
-              [
-                'npm install',
-                'npm run build',
-                'cp -r /asset-input/dist /asset-output/',
-                'npm install --only=production',
-                'cp -a /asset-input/node_modules /asset-output/',
-              ].join(' && '),
-            ],
-          },
-        }
-      ),
-      runtime: lambda.Runtime.NODEJS_14_X,
-      handler: 'dist/codepipelineEventLambda.handler',
-      environment: {
-        STAGE: stage ?? '',
-        SLACK_WEBHOOK_URL: slackWebhookURL ?? '',
-        BADGE_BUCKET_NAME: badgeBucket.bucketName,
-        BADGE_BUCKET_IMAGE_KEY_NAME: badgeBucketImageKeyName,
-        CODE_PIPELINE_NAME: codePipelineName,
-        GITHUB_PERSONAL_TOKEN: gitHubToken ? `${gitHubToken}` : '',
-      },
-    });
+    const lambdaFunc = new lambda.DockerImageFunction(
+      this,
+      'CodepipelineEventLambda',
+      {
+        code: lambda.DockerImageCode.fromImageAsset(
+          path.join(__dirname, '../lambda/codepipeline-event'),
+          {
+            cmd: ['codepipelineEventLambda.handler'],
+          }
+        ),
+        environment: {
+          STAGE: stage ?? '',
+          SLACK_WEBHOOK_URL: slackWebhookURL ?? '',
+          BADGE_BUCKET_NAME: badgeBucket.bucketName,
+          BADGE_BUCKET_IMAGE_KEY_NAME: badgeBucketImageKeyName,
+          CODE_PIPELINE_NAME: codePipelineName,
+          GITHUB_PERSONAL_TOKEN: gitHubToken ? `${gitHubToken}` : '',
+        },
+      }
+    );
 
     badgeBucket.grantReadWrite(lambdaFunc);
 

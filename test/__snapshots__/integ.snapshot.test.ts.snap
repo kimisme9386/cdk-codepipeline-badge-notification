@@ -12,7 +12,7 @@ Object {
             Object {
               "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
             },
-            ".s3-ap-northeast-1.amazonaws.com/latest-build.svg#1",
+            ".s3-ap-northeast-1.amazonaws.com/production-latest-build.svg#1",
           ],
         ],
       },
@@ -44,7 +44,7 @@ Object {
             Object {
               "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
             },
-            ".s3-ap-northeast-1.amazonaws.com/latest-build.svg#1)](https://",
+            ".s3-ap-northeast-1.amazonaws.com/production-latest-build.svg#1)](https://",
             Object {
               "Ref": "AWS::Region",
             },
@@ -56,20 +56,6 @@ Object {
           ],
         ],
       },
-    },
-  },
-  "Parameters": Object {
-    "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7ArtifactHashCDD2C954": Object {
-      "Description": "Artifact hash for asset \\"8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7\\"",
-      "Type": "String",
-    },
-    "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7S3Bucket3A92BC98": Object {
-      "Description": "S3 bucket for asset \\"8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7\\"",
-      "Type": "String",
-    },
-    "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7S3VersionKeyDF2FBD4D": Object {
-      "Description": "S3 key for asset version \\"8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7\\"",
-      "Type": "String",
     },
   },
   "Resources": Object {
@@ -391,46 +377,29 @@ Object {
       ],
       "Properties": Object {
         "Code": Object {
-          "S3Bucket": Object {
-            "Ref": "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7S3Bucket3A92BC98",
-          },
-          "S3Key": Object {
+          "ImageUri": Object {
             "Fn::Join": Array [
               "",
               Array [
                 Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7S3VersionKeyDF2FBD4D",
-                        },
-                      ],
-                    },
-                  ],
+                  "Ref": "AWS::AccountId",
                 },
+                ".dkr.ecr.",
                 Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8e0393b4e8bb86d3f60c2b9a25b3408ace75decbc9b750b7d6fbb94eabaa9df7S3VersionKeyDF2FBD4D",
-                        },
-                      ],
-                    },
-                  ],
+                  "Ref": "AWS::Region",
                 },
+                ".",
+                Object {
+                  "Ref": "AWS::URLSuffix",
+                },
+                "/aws-cdk/assets:2799ca43f7ef1607a6fbd514461315ce39509a1a014e4b6da2e748c2bc78a0fc",
               ],
             ],
           },
         },
         "Environment": Object {
           "Variables": Object {
-            "BADGE_BUCKET_IMAGE_KEY_NAME": "latest-build.svg",
+            "BADGE_BUCKET_IMAGE_KEY_NAME": "production-latest-build.svg",
             "BADGE_BUCKET_NAME": Object {
               "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
             },
@@ -438,18 +407,22 @@ Object {
               "Ref": "TestPipelineF8A74B39",
             },
             "GITHUB_PERSONAL_TOKEN": "{{resolve:secretsmanager:arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII:SecretString:codepipeline/lambda/github-token::}}",
-            "SLACK_WEBHOOK_URL": "",
-            "STAGE": "",
+            "SLACK_WEBHOOK_URL": "slack url webhook",
+            "STAGE": "production",
           },
         },
-        "Handler": "dist/codepipelineEventLambda.handler",
+        "ImageConfig": Object {
+          "Command": Array [
+            "codepipelineEventLambda.handler",
+          ],
+        },
+        "PackageType": "Image",
         "Role": Object {
           "Fn::GetAtt": Array [
             "CodePipelineStatusCodepipelineEventLambdaServiceRole6CB7440B",
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
         "Tags": Array [
           Object {
             "Key": "CDK-CfnStackId",
