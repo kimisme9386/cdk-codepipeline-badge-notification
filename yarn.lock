@@ -5457,10 +5457,10 @@ projen@^0.17:
     yaml "^1.10.0"
     yargs "^16.2.0"
 
-projen@^0.17.66:
-  version "0.17.66"
-  resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.66.tgz#0c9bf729a7f1bd2502db92965898eeaa7c42e8b8"
-  integrity sha512-lKzMMhsezu0SMClDE3M+Y6yQT6FgrEyLwfs4Cuduyh4PNXhzmdckhpjGmauBgPSVqHDeMikdRyi99vKA6ulGbw==
+projen@^0.17.73:
+  version "0.17.73"
+  resolved "https://registry.yarnpkg.com/projen/-/projen-0.17.73.tgz#e6a2663156daaec1ddc69477c6e45f42ec64e5de"
+  integrity sha512-9gGrmFV1uRNrfgqp4OIgP2doYElH8voE5z+u7e0QceDrtuwq4827hXw4U/wIa7roJnhZTJeyBeMRYfA5p2FvnQ==
   dependencies:
     "@iarna/toml" "^2.2.5"
     chalk "^4.1.0"
