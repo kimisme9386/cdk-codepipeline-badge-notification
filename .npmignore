@@ -25,3 +25,4 @@ yarn-error.log
 !/lib
 !/lib/**/*.d.ts
 !/lib/**/*.js
+!lambda/codepipeline-event/tsconfig.json
