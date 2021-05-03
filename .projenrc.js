@@ -70,7 +70,7 @@ const common_exclude = [
 project.npmignore.exclude(...common_exclude);
 project.gitignore.exclude(...common_exclude);
 
-const common_include = ['lambda/codepipeline-event/tsconfig.json'];
+const common_include = ['/lambda/codepipeline-event/tsconfig.json'];
 
 project.npmignore.include(...common_include);
 project.gitignore.include(...common_include);
