@@ -22,7 +22,7 @@ junit.xml
 lambda/codepipeline-event/dist
 yarn-error.log
 !.jsii
+!/lambda/codepipeline-event/tsconfig.json
 !/lib
 !/lib/**/*.d.ts
 !/lib/**/*.js
-!lambda/codepipeline-event/tsconfig.json
