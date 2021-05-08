@@ -20,6 +20,7 @@ dist
 images
 junit.xml
 lambda/codepipeline-event/dist
+tsconfig.tsbuildinfo
 yarn-error.log
 !.jsii
 !/lambda/codepipeline-event/tsconfig.json
