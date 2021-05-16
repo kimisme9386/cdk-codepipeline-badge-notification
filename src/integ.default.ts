@@ -1,6 +1,6 @@
 import * as codebuild from '@aws-cdk/aws-codebuild';
-import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
 import * as codePipeline from '@aws-cdk/aws-codepipeline';
+import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
 import * as cdk from '@aws-cdk/core';
 import { CodePipelineStatus } from './index';
 
