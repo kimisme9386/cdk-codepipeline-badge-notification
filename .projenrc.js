@@ -1,6 +1,4 @@
 const { AwsCdkConstructLibrary } = require('projen');
-const { Automation } = require('projen-automate-it');
-
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
@@ -35,7 +33,9 @@ const project = new AwsCdkConstructLibrary({
     announce: false,
   },
   stability: 'experimental',
-  releaseBranches: ['main'],
+  autoApproveOptions: {
+    secret: AUTOMATION_TOKEN,
+  },
 });
 
 project.eslint.addRules({
@@ -50,13 +50,6 @@ project.eslint.addRules({
     },
   ],
 });
-
-const automation = new Automation(project, {
-  automationToken: AUTOMATION_TOKEN,
-});
-
-automation.projenYarnUpgrade();
-automation.autoApprove();
 
 const common_exclude = [
   'cdk.out',
