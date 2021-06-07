@@ -36,8 +36,8 @@ const project = new AwsCdkConstructLibrary({
   },
   stability: 'experimental',
   autoApproveOptions: {
-    secret: AUTOMATION_TOKEN,
-    allowedUsernames: ['github-actions', 'github-bot'],
+    secret: 'GITHUB_TOKEN',
+    allowedUsernames: ['kimisme9386', 'kimisme9386-bot'],
   },
   depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
     workflowOptions: {
