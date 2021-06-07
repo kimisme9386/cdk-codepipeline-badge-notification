@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    if: contains(github.event.pull_request.labels.*.name, 'auto-approve')
+    if: contains(github.event.pull_request.labels.*.name, 'auto-approve') &&
+      (github.event.pull_request.login == 'github-actions' ||
+      github.event.pull_request.login == 'github-bot')
     steps:
-      - uses: hmarr/debug-action@v2
       - uses: hmarr/auto-approve-action@v2.1.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
