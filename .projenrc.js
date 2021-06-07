@@ -1,4 +1,7 @@
-const { AwsCdkConstructLibrary } = require('projen');
+const {
+  AwsCdkConstructLibrary,
+  DependenciesUpgradeMechanism,
+} = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
@@ -24,7 +27,6 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-iam',
   ],
   devDeps: ['projen-automate-it'],
-  dependabot: false,
   publishToPypi: {
     distName: 'cdk-pipeline-status',
     module: 'cdk_pipeline_status',
@@ -36,6 +38,11 @@ const project = new AwsCdkConstructLibrary({
   autoApproveOptions: {
     secret: AUTOMATION_TOKEN,
   },
+  depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
+    workflowOptions: {
+      labels: ['auto-approve', 'auto-merge'],
+    },
+  }),
 });
 
 project.eslint.addRules({
