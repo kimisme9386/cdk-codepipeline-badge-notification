@@ -279,7 +279,9 @@ Object {
             Object {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Principal": "*",
+              "Principal": Object {
+                "AWS": "*",
+              },
               "Resource": Object {
                 "Fn::Join": Array [
                   "",
