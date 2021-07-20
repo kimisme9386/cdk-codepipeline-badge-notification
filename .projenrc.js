@@ -32,7 +32,7 @@ const project = new AwsCdkConstructLibrary({
     module: 'cdk_pipeline_status',
   },
   catalog: {
-    announce: false,
+    announce: true,
   },
   stability: 'experimental',
   autoApproveOptions: {
