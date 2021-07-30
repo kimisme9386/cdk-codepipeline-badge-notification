@@ -7,7 +7,7 @@ const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
   author: 'Chris Yang',
-  authorAddress: 'kimisme9386@gmail.com',
+  authorUrl: 'https://9incloud.com/',
   cdkVersion: '1.100.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
@@ -44,6 +44,7 @@ const project = new AwsCdkConstructLibrary({
       labels: ['auto-approve'],
       secret: AUTOMATION_TOKEN,
     },
+    ignoreProjen: false,
   }),
 });
 
