@@ -73,12 +73,11 @@
       "type": "build"
     },
     {
-      "name": "projen-automate-it",
+      "name": "projen",
       "type": "build"
     },
     {
-      "name": "projen",
-      "version": "^0.22.7",
+      "name": "projen-automate-it",
       "type": "build"
     },
     {
