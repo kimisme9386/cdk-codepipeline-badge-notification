@@ -5,12 +5,10 @@ image:
 tasks:
   - name: install package
     init: yarn gitpod:prebuild
+  - name: check zsh and zsh plugin
+    init: sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
   - name: run docker
     command: sudo docker-up &
-  - name: git command completion
-    command: echo "source /usr/share/bash-completion/completions/git" >> $HOME/.zshrc
-  - name: add alias for aws cli v2 command auto prompt
-    command: echo "alias awsap="aws --cli-auto-prompt"" >> $HOME/.zshrc
   - name: start zsh shell
     command: zsh
 github:
