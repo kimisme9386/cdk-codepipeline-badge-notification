@@ -104,18 +104,13 @@ gitpod.addCustomTask({
 });
 
 gitpod.addCustomTask({
+  name: 'check zsh and zsh plugin',
+  init: 'sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh',
+})
+
+gitpod.addCustomTask({
   name: 'run docker',
   command: 'sudo docker-up &',
-});
-
-gitpod.addCustomTask({
-  name: 'git command completion',
-  command: 'echo "source /usr/share/bash-completion/completions/git" >> $HOME/.zshrc',
-});
-
-gitpod.addCustomTask({
-  name: 'add alias for aws cli v2 command auto prompt',
-  command: 'echo "alias awsap=\"aws --cli-auto-prompt\"" >> $HOME/.zshrc',
 });
 
 gitpod.addCustomTask({
@@ -125,7 +120,7 @@ gitpod.addCustomTask({
 
 /* spellchecker: disable */
 gitpod.addVscodeExtensions(
-  'dbaeumer.vscode-eslint',
+  'dbaeumer.vscode-eslint'
 );
 
 

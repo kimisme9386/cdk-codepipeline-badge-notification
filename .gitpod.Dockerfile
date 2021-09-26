@@ -9,16 +9,10 @@ RUN ["apt-get", "install", "-y", "zsh"]
 
 USER gitpod
 
-# Install Oh-My-Zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+COPY ./.gitpod/oh-my-zsh.sh ./.gitpod/oh-my-zsh.sh
 
-# Change zsh theme and zsh plugin
-RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc && \
-  sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions)/' ~/.zshrc
-
-# install zsh plugin
-RUN git clone git://github.com/zsh-users/zsh-autosuggestions && \
-  sudo mv zsh-autosuggestions ~/.oh-my-zsh/custom/plugins  
+# Install Oh-My-Zsh and setup zsh
+RUN sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
 
 # install aws cdk && aws-cli v2
 RUN npm i -g aws-cdk && \
