@@ -1,6 +1,8 @@
 const {
   AwsCdkConstructLibrary,
   DependenciesUpgradeMechanism,
+  Gitpod,
+  DevEnvironmentDockerImage,
 } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
@@ -77,5 +79,54 @@ const common_include = ['/lambda/codepipeline-event/tsconfig.json'];
 
 project.npmignore.include(...common_include);
 project.gitignore.include(...common_include);
+
+// gitpod
+const gitpodPrebuild = project.addTask('gitpod:prebuild', {
+  description: 'Prebuild setup for Gitpod',
+});
+gitpodPrebuild.exec('yarn install --frozen-lockfile --check-files');
+
+let gitpod = new Gitpod(project, {
+  dockerImage: DevEnvironmentDockerImage.fromFile('.gitpod.Dockerfile'),
+  prebuilds: {
+    addCheck: true,
+    addBadge: true,
+    addLabel: true,
+    branches: true,
+    pullRequests: true,
+    pullRequestsFromForks: true,
+  },
+});
+
+gitpod.addCustomTask({
+  name: 'install package',
+  init: 'yarn gitpod:prebuild',
+});
+
+gitpod.addCustomTask({
+  name: 'run docker',
+  command: 'sudo docker-up &',
+});
+
+gitpod.addCustomTask({
+  name: 'git command completion',
+  command: 'echo "source /usr/share/bash-completion/completions/git" >> $HOME/.zshrc',
+});
+
+gitpod.addCustomTask({
+  name: 'add alias for aws cli v2 command auto prompt',
+  command: 'echo "alias awsap=\"aws --cli-auto-prompt\"" >> $HOME/.zshrc',
+});
+
+gitpod.addCustomTask({
+  name: 'start zsh shell',
+  command: 'zsh',
+});
+
+/* spellchecker: disable */
+gitpod.addVscodeExtensions(
+  'dbaeumer.vscode-eslint',
+);
+
 
 project.synth();
