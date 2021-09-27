@@ -7,8 +7,6 @@ tasks:
     init: |-
       yarn gitpod:prebuild
       sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
-  - name: run docker
-    command: sudo docker-up &
   - name: change default shell to zsh and start zsh shell
     command: chsh -s $(which zsh) && zsh
 github:
