@@ -13,7 +13,7 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.100.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
-  name: 'cdk-pipeline-status',
+  name: 'cdk-pipeline-badge-notification',
   describe:
     'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
   repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-status.git',
@@ -30,8 +30,8 @@ const project = new AwsCdkConstructLibrary({
   ],
   devDeps: ['projen-automate-it'],
   publishToPypi: {
-    distName: 'cdk-pipeline-status',
-    module: 'cdk_pipeline_status',
+    distName: 'cdk-pipeline-badge-notification',
+    module: 'cdk_pipeline_badge_notification',
   },
   catalog: {
     announce: true,
@@ -105,18 +105,14 @@ sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh`,
 });
 
 gitpod.addCustomTask({
-  name: 'run docker',
-  command: 'sudo docker-up &',
-});
-
-gitpod.addCustomTask({
   name: 'change default shell to zsh and start zsh shell',
   command: 'sudo chsh -s $(which zsh) && zsh',
 });
 
 /* spellchecker: disable */
 gitpod.addVscodeExtensions(
-  'dbaeumer.vscode-eslint'
+  'dbaeumer.vscode-eslint',
+  'streetsidesoftware.code-spell-checker-spanish'
 );
 
 
