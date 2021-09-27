@@ -112,7 +112,7 @@ gitpod.addCustomTask({
 /* spellchecker: disable */
 gitpod.addVscodeExtensions(
   'dbaeumer.vscode-eslint',
-  'streetsidesoftware.code-spell-checker-spanish',
+  'streetsidesoftware.code-spell-checker-spanish'
 );
 
 
