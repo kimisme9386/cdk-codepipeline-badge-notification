@@ -4,20 +4,20 @@
 
 Name|Description
 ----|-----------
-[CodePipelineStatus](#cdk-pipeline-status-codepipelinestatus)|*No description*
+[CodePipelineStatus](#cdk-pipeline-badge-notification-codepipelinestatus)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[CodePipelineStatusProps](#cdk-pipeline-status-codepipelinestatusprops)|*No description*
-[GitHubTokenFromSecretsManager](#cdk-pipeline-status-githubtokenfromsecretsmanager)|*No description*
-[Notification](#cdk-pipeline-status-notification)|*No description*
+[CodePipelineStatusProps](#cdk-pipeline-badge-notification-codepipelinestatusprops)|*No description*
+[GitHubTokenFromSecretsManager](#cdk-pipeline-badge-notification-githubtokenfromsecretsmanager)|*No description*
+[Notification](#cdk-pipeline-badge-notification-notification)|*No description*
 
 
 
-## class CodePipelineStatus 🔹 <a id="cdk-pipeline-status-codepipelinestatus"></a>
+## class CodePipelineStatus 🔹 <a id="cdk-pipeline-badge-notification-codepipelinestatus"></a>
 
 
 
@@ -35,10 +35,10 @@ new CodePipelineStatus(scope: Construct, id: string, props: CodePipelineStatusPr
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[CodePipelineStatusProps](#cdk-pipeline-status-codepipelinestatusprops)</code>)  *No description*
+* **props** (<code>[CodePipelineStatusProps](#cdk-pipeline-badge-notification-codepipelinestatusprops)</code>)  *No description*
   * **pipelineArn** (<code>string</code>)  AWS CodePipeline arn. 
-  * **gitHubTokenFromSecretsManager** (<code>[GitHubTokenFromSecretsManager](#cdk-pipeline-status-githubtokenfromsecretsmanager)</code>)  AWS Secret Manager id or arn. __*Optional*__
-  * **notification** (<code>[Notification](#cdk-pipeline-status-notification)</code>)  Notification. __*Optional*__
+  * **gitHubTokenFromSecretsManager** (<code>[GitHubTokenFromSecretsManager](#cdk-pipeline-badge-notification-githubtokenfromsecretsmanager)</code>)  AWS Secret Manager id or arn. __*Optional*__
+  * **notification** (<code>[Notification](#cdk-pipeline-badge-notification-notification)</code>)  Notification. __*Optional*__
 
 
 
@@ -52,7 +52,7 @@ Name | Type | Description
 
 
 
-## struct CodePipelineStatusProps 🔹 <a id="cdk-pipeline-status-codepipelinestatusprops"></a>
+## struct CodePipelineStatusProps 🔹 <a id="cdk-pipeline-badge-notification-codepipelinestatusprops"></a>
 
 
 
@@ -62,12 +62,12 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **pipelineArn**🔹 | <code>string</code> | AWS CodePipeline arn.
-**gitHubTokenFromSecretsManager**?🔹 | <code>[GitHubTokenFromSecretsManager](#cdk-pipeline-status-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
-**notification**?🔹 | <code>[Notification](#cdk-pipeline-status-notification)</code> | Notification.<br/>__*Optional*__
+**gitHubTokenFromSecretsManager**?🔹 | <code>[GitHubTokenFromSecretsManager](#cdk-pipeline-badge-notification-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
+**notification**?🔹 | <code>[Notification](#cdk-pipeline-badge-notification-notification)</code> | Notification.<br/>__*Optional*__
 
 
 
-## struct GitHubTokenFromSecretsManager 🔹 <a id="cdk-pipeline-status-githubtokenfromsecretsmanager"></a>
+## struct GitHubTokenFromSecretsManager 🔹 <a id="cdk-pipeline-badge-notification-githubtokenfromsecretsmanager"></a>
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description
 
 
 
-## struct Notification 🔹 <a id="cdk-pipeline-status-notification"></a>
+## struct Notification 🔹 <a id="cdk-pipeline-badge-notification-notification"></a>
 
 
 
