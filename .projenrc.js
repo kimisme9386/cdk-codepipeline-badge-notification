@@ -106,7 +106,7 @@ gitpod.addCustomTask({
 gitpod.addCustomTask({
   name: 'check zsh and zsh plugin',
   init: 'sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh',
-})
+});
 
 gitpod.addCustomTask({
   name: 'run docker',
