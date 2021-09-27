@@ -30,7 +30,9 @@ export class IntegTesting {
         },
         notification: {
           stageName: 'production',
-          slackWebHookUrl: 'slack url webhook',
+          ssmSlackWebHookUrl: 'ssm_slack_webhook',
+          ssmGoogleChatWebHookUrl: 'ssm_google_chat_webhook',
+          ssmTelegramWebHookUrl: 'ssm_telegram_webhook',
         },
       }
     );

@@ -66,6 +66,7 @@
     "@aws-cdk/aws-lambda": "^1.100.0",
     "@aws-cdk/aws-s3": "^1.100.0",
     "@aws-cdk/aws-secretsmanager": "^1.100.0",
+    "@aws-cdk/aws-ssm": "^1.100.0",
     "@aws-cdk/core": "^1.100.0",
     "constructs": "^3.2.27"
   },
@@ -78,6 +79,7 @@
     "@aws-cdk/aws-lambda": "^1.100.0",
     "@aws-cdk/aws-s3": "^1.100.0",
     "@aws-cdk/aws-secretsmanager": "^1.100.0",
+    "@aws-cdk/aws-ssm": "^1.100.0",
     "@aws-cdk/core": "^1.100.0"
   },
   "bundledDependencies": [],

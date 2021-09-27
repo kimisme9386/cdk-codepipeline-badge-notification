@@ -38,6 +38,7 @@ export const handler = async (
   console.info('Debug event\n' + JSON.stringify(event, null, 2));
   const state = event.detail.state;
   const subject = `project: ${event.detail.pipeline} \n ${event['detail-type']}: ${state}`;
+  const codePipelineLink = `https://ap-northeast-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/${event.detail.pipeline}/view`;
   const webhookUrl = (process.env.SLACK_WEBHOOK_URL as string) ?? '';
   const badgeBucket = process.env.BADGE_BUCKET_NAME as string;
   const badgeBucketImageKeyName = process.env

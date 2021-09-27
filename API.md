@@ -90,7 +90,9 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**slackWebHookUrl**?🔹 | <code>string</code> | Slack webhook url.<br/>__*Optional*__
+**ssmGoogleChatWebHookUrl**?🔹 | <code>string</code> | google chat ewb hook url from ssm parameter.<br/>__*Optional*__
+**ssmSlackWebHookUrl**?🔹 | <code>string</code> | Slack webhook url from ssm parameter.<br/>__*Optional*__
+**ssmTelegramWebHookUrl**?🔹 | <code>string</code> | telegram web hook url from from ssm parameter.<br/>__*Optional*__
 **stageName**?🔹 | <code>string</code> | Prefix title for slack message.<br/>__*Optional*__
 
 

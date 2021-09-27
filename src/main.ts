@@ -4,6 +4,7 @@ import * as targets from '@aws-cdk/aws-events-targets';
 import * as iam from '@aws-cdk/aws-iam';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as s3 from '@aws-cdk/aws-s3';
+import * as ssm from '@aws-cdk/aws-ssm';
 import * as cdk from '@aws-cdk/core';
 
 export interface Notification {
@@ -12,9 +13,17 @@ export interface Notification {
    */
   readonly stageName?: string;
   /**
-   * Slack webhook url
+   * Slack webhook url from ssm parameter
    */
-  readonly slackWebHookUrl?: string;
+  readonly ssmSlackWebHookUrl?: string;
+  /**
+   * google chat ewb hook url from ssm parameter
+   */
+  readonly ssmGoogleChatWebHookUrl?: string;
+  /**
+   * telegram web hook url from from ssm parameter
+   */
+  readonly ssmTelegramWebHookUrl?: string;
 }
 
 export interface GitHubTokenFromSecretsManager {
@@ -76,7 +85,9 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
       pipeline.pipelineName,
       gitHubToken,
       props?.notification?.stageName,
-      props?.notification?.slackWebHookUrl
+      props?.notification?.ssmSlackWebHookUrl,
+      props?.notification?.ssmGoogleChatWebHookUrl,
+      props?.notification?.ssmTelegramWebHookUrl
     );
 
     pipeline.onStateChange('CodePipelineChange', {
@@ -92,7 +103,9 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
     codePipelineName: string,
     gitHubToken: cdk.SecretValue | null,
     stage: string | undefined,
-    slackWebhookURL: string | undefined
+    ssmSlackWebHookUrl: string | undefined,
+    ssmGoogleChatWebHookUrl: string | undefined,
+    ssmTelegramWebHookUrl: string | undefined
   ): lambda.Function {
     const badgeBucket = new s3.Bucket(this, 'BadgeBucket', {
       publicReadAccess: true,
@@ -113,7 +126,12 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
         ),
         environment: {
           STAGE: stage ?? '',
-          SLACK_WEBHOOK_URL: slackWebhookURL ?? '',
+          SLACK_WEBHOOK_URL: ssmSlackWebHookUrl ?
+            ssm.StringParameter.valueForStringParameter(this, 'ssmSlackWebHookUrl') : '',
+          GOOGLE_CHAT_WEBHOOK_URL: ssmGoogleChatWebHookUrl ?
+            ssm.StringParameter.valueForStringParameter(this, 'ssmGoogleChatWebHookUrl') : '',
+          TELEGRAM_WEBHOOK_URL: ssmTelegramWebHookUrl ?
+            ssm.StringParameter.valueForStringParameter(this, 'ssmTelegramWebHookUrl') : '',
           BADGE_BUCKET_NAME: badgeBucket.bucketName,
           BADGE_BUCKET_IMAGE_KEY_NAME: badgeBucketImageKeyName,
           CODE_PIPELINE_NAME: codePipelineName,

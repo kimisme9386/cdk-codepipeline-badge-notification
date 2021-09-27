@@ -58,6 +58,12 @@ Object {
       },
     },
   },
+  "Parameters": Object {
+    "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "ssmSlackWebHookUrl",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
   "Resources": Object {
     "CodeBuildWithinCodePipeline0585DD46": Object {
       "Properties": Object {
@@ -394,7 +400,7 @@ Object {
                 Object {
                   "Ref": "AWS::URLSuffix",
                 },
-                "/aws-cdk/assets:b19c5f0c51126adda1f888facf9ada18486111301fbe6efe35c75edd849a38e7",
+                "/aws-cdk/assets:55c33dd6627a772b15aa646f12952167bc615d4b2bdf0a49e7ebf2ec0e29f5d3",
               ],
             ],
           },
@@ -409,8 +415,12 @@ Object {
               "Ref": "TestPipelineF8A74B39",
             },
             "GITHUB_PERSONAL_TOKEN": "{{resolve:secretsmanager:arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII:SecretString:codepipeline/lambda/github-token::}}",
-            "SLACK_WEBHOOK_URL": "slack url webhook",
+            "GOOGLE_CHAT_WEBHOOK_URL": "",
+            "SLACK_WEBHOOK_URL": Object {
+              "Ref": "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+            },
             "STAGE": "production",
+            "TELEGRAM_WEBHOOK_URL": "",
           },
         },
         "ImageConfig": Object {
