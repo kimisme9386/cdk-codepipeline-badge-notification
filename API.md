@@ -4,20 +4,20 @@
 
 Name|Description
 ----|-----------
-[CodePipelineStatus](#cdk-codepipeline-badge-notification-codepipelinestatus)|*No description*
+[CodePipelineBadgeNotification](#cdk-codepipeline-badge-notification-codepipelinebadgenotification)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[CodePipelineStatusProps](#cdk-codepipeline-badge-notification-codepipelinestatusprops)|*No description*
+[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops)|*No description*
 [GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager)|*No description*
 [Notification](#cdk-codepipeline-badge-notification-notification)|*No description*
 
 
 
-## class CodePipelineStatus 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinestatus"></a>
+## class CodePipelineBadgeNotification 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinebadgenotification"></a>
 
 
 
@@ -30,12 +30,12 @@ __Extends__: [Construct](#aws-cdk-core-construct)
 
 
 ```ts
-new CodePipelineStatus(scope: Construct, id: string, props: CodePipelineStatusProps)
+new CodePipelineBadgeNotification(scope: Construct, id: string, props: CodePipelineBadgeNotificationProps)
 ```
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[CodePipelineStatusProps](#cdk-codepipeline-badge-notification-codepipelinestatusprops)</code>)  *No description*
+* **props** (<code>[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops)</code>)  *No description*
   * **pipelineArn** (<code>string</code>)  AWS CodePipeline arn. 
   * **gitHubTokenFromSecretsManager** (<code>[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager)</code>)  AWS Secret Manager id or arn. __*Optional*__
   * **notification** (<code>[Notification](#cdk-codepipeline-badge-notification-notification)</code>)  Notification. __*Optional*__
@@ -52,7 +52,7 @@ Name | Type | Description
 
 
 
-## struct CodePipelineStatusProps 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinestatusprops"></a>
+## struct CodePipelineBadgeNotificationProps 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops"></a>
 
 
 

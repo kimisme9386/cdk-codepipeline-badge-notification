@@ -2,7 +2,7 @@ import * as codebuild from '@aws-cdk/aws-codebuild';
 import * as codePipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
 import * as cdk from '@aws-cdk/core';
-import { CodePipelineStatus } from './index';
+import { CodePipelineBadgeNotification } from './index';
 
 export class IntegTesting {
   readonly stack: cdk.Stack[];
@@ -14,11 +14,11 @@ export class IntegTesting {
       account: process.env.CDK_DEFAULT_ACCOUNT,
     };
 
-    const stack = new cdk.Stack(app, 'my-codepipeline-status-stack', { env });
+    const stack = new cdk.Stack(app, 'my-codepipeline-badge-notification-stack', { env });
 
     const pipeline = this.createCodePipeline(stack);
 
-    const codePipelineStatus = new CodePipelineStatus(
+    const codePipelineStatus = new CodePipelineBadgeNotification(
       stack,
       'CodePipelineStatus',
       {

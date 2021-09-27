@@ -303,7 +303,7 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "CodePipelineStatusCodePipelineCodePipelineChangeAllowEventRulemycodepipelinestatusstackCodePipelineStatusCodepipelineEventLambda7F43A6DDD6564353": Object {
+    "CodePipelineStatusCodePipelineCodePipelineChangeAllowEventRulemycodepipelinebadgenotificationstackCodePipelineStatusCodepipelineEventLambda08199AE13DBFFF1B": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {

@@ -29,7 +29,7 @@ export interface GitHubTokenFromSecretsManager {
   readonly secretKey?: string;
 }
 
-export interface CodePipelineStatusProps {
+export interface CodePipelineBadgeNotificationProps {
   /**
    * AWS CodePipeline arn
    */
@@ -44,14 +44,14 @@ export interface CodePipelineStatusProps {
   readonly notification?: Notification;
 }
 
-export class CodePipelineStatus extends cdk.Construct {
+export class CodePipelineBadgeNotification extends cdk.Construct {
   badgeUrl: string = '';
   codePipelineLink: string = '';
 
   constructor(
     scope: cdk.Construct,
     id: string,
-    props: CodePipelineStatusProps
+    props: CodePipelineBadgeNotificationProps
   ) {
     super(scope, id);
 

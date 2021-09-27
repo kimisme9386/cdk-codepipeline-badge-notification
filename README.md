@@ -1,8 +1,8 @@
-[![NPM version](https://badge.fury.io/js/cdk-pipeline-status.svg)](https://badge.fury.io/js/cdk-pipeline-status)
-[![PyPI version](https://badge.fury.io/py/cdk-pipeline-status.svg)](https://badge.fury.io/py/cdk-pipeline-status)
-[![Release](https://github.com/kimisme9386/cdk-codepipeline-status/actions/workflows/release.yml/badge.svg)](https://github.com/kimisme9386/cdk-codepipeline-status/actions/workflows/release.yml)
+[![NPM version](https://badge.fury.io/js/cdk-codepipeline-badge-notification.svg)](https://badge.fury.io/js/cdk-codepipeline-badge-notification)
+[![PyPI version](https://badge.fury.io/py/cdk-codepipeline-badge-notification.svg)](https://badge.fury.io/py/cdk-codepipeline-badge-notification)
+[![Release](https://github.com/kimisme9386/cdk-codepipeline-badge-notification/actions/workflows/release.yml/badge.svg)](https://github.com/kimisme9386/cdk-codepipeline-badge-notification/actions/workflows/release.yml)
 
-# CDK-CodePipeline-Status
+# CDK-CodePipeline-Badge-Notification
 
 ## Feature
 
@@ -15,7 +15,7 @@
 ## Usage
 
 ```ts
-import { CodePipelineStatus } from 'cdk-pipeline-status';
+import { CodePipelineBadgeNotification } from 'cdk-pipeline-badge-notification';
 import * as cdk from '@aws-cdk/core';
 import * as codePipeline from '@aws-cdk/aws-codepipeline';
 
@@ -24,14 +24,14 @@ const env = {
   region: process.env.CDK_DEFAULT_REGION,
   account: process.env.CDK_DEFAULT_ACCOUNT,
 };
-const stack = new cdk.Stack(app, 'codepipeline-status', { env });
+const stack = new cdk.Stack(app, 'codepipeline-badge-notification', { env });
 
 const pipeline = new codePipeline.Pipeline(stack, 'TestPipeline', {
   pipelineName: 'testCodePipeline',
   crossAccountKeys: false,
 });
 
-new CodePipelineStatus(stack, 'CodePipelineStatus', {
+new CodePipelineBadgeNotification(stack, 'CodePipelineBadgeNotification', {
   pipelineArn: pipeline.pipelineArn,
   gitHubTokenFromSecretsManager: {
     secretsManagerArn:
@@ -50,7 +50,7 @@ new CodePipelineStatus(stack, 'CodePipelineStatus', {
 #### Only badge
 
 ```ts
-new CodePipelineStatus(stack, 'CodePipelineStatus', {
+new CodePipelineBadgeNotification(stack, 'CodePipelineBadgeNotification', {
   pipelineArn: pipeline.pipelineArn,
 });
 ```
