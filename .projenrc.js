@@ -106,7 +106,7 @@ sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh`,
 
 gitpod.addCustomTask({
   name: 'change default shell to zsh and start zsh shell',
-  command: 'chsh -s $(which zsh) && zsh',
+  command: 'sudo chsh -s $(which zsh) && zsh',
 });
 
 /* spellchecker: disable */
