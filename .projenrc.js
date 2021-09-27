@@ -99,13 +99,9 @@ let gitpod = new Gitpod(project, {
 });
 
 gitpod.addCustomTask({
-  name: 'install package',
-  init: 'yarn gitpod:prebuild',
-});
-
-gitpod.addCustomTask({
-  name: 'check zsh and zsh plugin',
-  init: 'sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh',
+  name: 'install package and check zsh and zsh plugin',
+  init: `yarn gitpod:prebuild
+sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh`,
 });
 
 gitpod.addCustomTask({
@@ -114,8 +110,8 @@ gitpod.addCustomTask({
 });
 
 gitpod.addCustomTask({
-  name: 'start zsh shell',
-  command: 'zsh',
+  name: 'change default shell to zsh and start zsh shell',
+  command: 'chsh -s $(which zsh) && zsh',
 });
 
 /* spellchecker: disable */

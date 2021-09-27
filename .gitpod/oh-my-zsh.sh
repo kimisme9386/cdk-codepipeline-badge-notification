@@ -16,19 +16,17 @@ while [[ ! -d ~/.oh-my-zsh ]]; do
 done
 
 if [[ -d ~/.oh-my-zsh ]]; then
-    # install zsh plugin
-    git clone git://github.com/zsh-users/zsh-autosuggestions && \
-    sudo mv zsh-autosuggestions ~/.oh-my-zsh/custom/plugins  
+
+    if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+        # install zsh plugin
+        git clone git://github.com/zsh-users/zsh-autosuggestions && \
+        sudo mv zsh-autosuggestions ~/.oh-my-zsh/custom/plugins  
+    fi
 
     # Change zsh theme and zsh plugin
     sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="agnoster"/' ~/.zshrc && \
     sed -i 's/plugins=(git)/plugins=(zsh-autosuggestions)/' ~/.zshrc
 fi
-
-if grep -q source /usr/share/bash-completion/completions/git ~/.zshrc; then
-    echo "source /usr/share/bash-completion/completions/git" >> ~/.zshrc
-    echo "alias awsap=\"aws --cli-auto-prompt\"" >> ~/.zshrc
-fi 
 
 if ! grep -q "source /usr/share/bash-completion/completions/git" ~/.zshrc; then
    echo "source /usr/share/bash-completion/completions/git" >> ~/.zshrc

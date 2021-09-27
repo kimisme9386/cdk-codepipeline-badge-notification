@@ -3,14 +3,14 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
-  - name: install package
-    init: yarn gitpod:prebuild
-  - name: check zsh and zsh plugin
-    init: sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
+  - name: install package and check zsh and zsh plugin
+    init: |-
+      yarn gitpod:prebuild
+      sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
   - name: run docker
     command: sudo docker-up &
-  - name: start zsh shell
-    command: zsh
+  - name: change default shell to zsh and start zsh shell
+    command: chsh -s $(which zsh) && zsh
 github:
   prebuilds:
     addCheck: true
