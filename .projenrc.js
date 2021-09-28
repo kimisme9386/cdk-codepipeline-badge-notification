@@ -27,6 +27,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-codebuild',
     '@aws-cdk/aws-secretsmanager',
     '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-ssm',
   ],
   devDeps: ['projen-automate-it'],
   publishToPypi: {
