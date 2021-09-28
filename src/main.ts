@@ -128,11 +128,11 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
         environment: {
           STAGE: stage ?? '',
           SLACK_WEBHOOK_URL: ssmSlackWebHookUrl ?
-            ssm.StringParameter.valueForStringParameter(this, 'ssmSlackWebHookUrl') : '',
+            ssm.StringParameter.valueForStringParameter(this, ssmSlackWebHookUrl) : '',
           GOOGLE_CHAT_WEBHOOK_URL: ssmGoogleChatWebHookUrl ?
-            ssm.StringParameter.valueForStringParameter(this, 'ssmGoogleChatWebHookUrl') : '',
+            ssm.StringParameter.valueForStringParameter(this, ssmGoogleChatWebHookUrl) : '',
           TELEGRAM_WEBHOOK_URL: ssmTelegramWebHookUrl ?
-            ssm.StringParameter.valueForStringParameter(this, 'ssmTelegramWebHookUrl') : '',
+            ssm.StringParameter.valueForStringParameter(this, ssmTelegramWebHookUrl) : '',
           BADGE_BUCKET_NAME: badgeBucket.bucketName,
           BADGE_BUCKET_IMAGE_KEY_NAME: badgeBucketImageKeyName,
           CODE_PIPELINE_NAME: codePipelineName,
@@ -140,7 +140,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
         },
       }
     );
-    
+
     badgeBucket.grantReadWrite(lambdaFunc);
 
     if (ssmSlackWebHookUrl && lambdaFunc.role) {
@@ -151,7 +151,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
               effect: iam.Effect.ALLOW,
               actions: ['ssm:GetParameter', 'ssm:GetParameters'],
               resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmSlackWebHookUrl}`],
-            })
+            }),
           ],
         })
       );
@@ -165,7 +165,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
               effect: iam.Effect.ALLOW,
               actions: ['ssm:GetParameter', 'ssm:GetParameters'],
               resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmGoogleChatWebHookUrl}`],
-            })
+            }),
           ],
         })
       );
@@ -179,7 +179,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
               effect: iam.Effect.ALLOW,
               actions: ['ssm:GetParameter', 'ssm:GetParameters'],
               resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmTelegramWebHookUrl}`],
-            })
+            }),
           ],
         })
       );
