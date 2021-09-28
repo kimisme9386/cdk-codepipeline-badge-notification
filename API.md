@@ -90,9 +90,9 @@ Name | Type | Description
 
 Name | Type | Description 
 -----|------|-------------
-**ssmGoogleChatWebHookUrl**?🔹 | <code>string</code> | google chat ewb hook url from ssm parameter.<br/>__*Optional*__
+**ssmGoogleChatWebHookUrl**?🔹 | <code>string</code> | google chat webhook url from ssm parameter.<br/>__*Optional*__
 **ssmSlackWebHookUrl**?🔹 | <code>string</code> | Slack webhook url from ssm parameter.<br/>__*Optional*__
-**ssmTelegramWebHookUrl**?🔹 | <code>string</code> | telegram web hook url from from ssm parameter.<br/>__*Optional*__
+**ssmTelegramWebHookUrl**?🔹 | <code>string</code> | telegram webhook url from from ssm parameter the URL is not include text query string.<br/>__*Optional*__
 **stageName**?🔹 | <code>string</code> | Prefix title for slack message.<br/>__*Optional*__
 
 

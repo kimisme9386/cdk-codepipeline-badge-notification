@@ -17,11 +17,12 @@ export interface Notification {
    */
   readonly ssmSlackWebHookUrl?: string;
   /**
-   * google chat ewb hook url from ssm parameter
+   * google chat webhook url from ssm parameter
    */
   readonly ssmGoogleChatWebHookUrl?: string;
   /**
-   * telegram web hook url from from ssm parameter
+   * telegram webhook url from from ssm parameter
+   * the URL is not include text query string
    */
   readonly ssmTelegramWebHookUrl?: string;
 }
@@ -139,8 +140,50 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
         },
       }
     );
-
+    
     badgeBucket.grantReadWrite(lambdaFunc);
+
+    if (ssmSlackWebHookUrl && lambdaFunc.role) {
+      lambdaFunc.role.attachInlinePolicy(
+        new iam.Policy(this, 'ssmSlackWebHookUrl', {
+          statements: [
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: ['ssm:GetParameter', 'ssm:GetParameters'],
+              resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmSlackWebHookUrl}`],
+            })
+          ],
+        })
+      );
+    }
+
+    if (ssmGoogleChatWebHookUrl && lambdaFunc.role) {
+      lambdaFunc.role.attachInlinePolicy(
+        new iam.Policy(this, 'ssmGoogleChatWebHookUrl', {
+          statements: [
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: ['ssm:GetParameter', 'ssm:GetParameters'],
+              resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmGoogleChatWebHookUrl}`],
+            })
+          ],
+        })
+      );
+    }
+
+    if (ssmTelegramWebHookUrl && lambdaFunc.role) {
+      lambdaFunc.role.attachInlinePolicy(
+        new iam.Policy(this, 'ssmTelegramWebHookUrl', {
+          statements: [
+            new iam.PolicyStatement({
+              effect: iam.Effect.ALLOW,
+              actions: ['ssm:GetParameter', 'ssm:GetParameters'],
+              resources: [`arn:aws:ssm:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:parameter/${ssmTelegramWebHookUrl}`],
+            })
+          ],
+        })
+      );
+    }
 
     const region = cdk.Aws.REGION ?? 'ap-northeast-1';
     this.badgeUrl = `https://${badgeBucket.bucketName}.s3-ap-northeast-1.amazonaws.com/${badgeBucketImageKeyName}#1`;
