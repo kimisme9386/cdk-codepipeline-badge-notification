@@ -1,8 +1,8 @@
 {
-  "name": "cdk-codepipeline-badge-notification",
+  "name": "cdk-pipeline-status",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kimisme9386/cdk-codepipeline-status.git"
+    "url": "https://github.com/kimisme9386/cdk-codepipeline-badge-notification"
   },
   "scripts": {
     "clobber": "npx projen clobber",
@@ -66,7 +66,6 @@
     "@aws-cdk/aws-lambda": "^1.100.0",
     "@aws-cdk/aws-s3": "^1.100.0",
     "@aws-cdk/aws-secretsmanager": "^1.100.0",
-    "@aws-cdk/aws-ssm": "^1.100.0",
     "@aws-cdk/core": "^1.100.0",
     "constructs": "^3.2.27"
   },
@@ -79,7 +78,6 @@
     "@aws-cdk/aws-lambda": "^1.100.0",
     "@aws-cdk/aws-s3": "^1.100.0",
     "@aws-cdk/aws-secretsmanager": "^1.100.0",
-    "@aws-cdk/aws-ssm": "^1.100.0",
     "@aws-cdk/core": "^1.100.0"
   },
   "bundledDependencies": [],
@@ -134,8 +132,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk-codepipeline-badge-notification",
-        "module": "cdk_codepipeline_badge_notification"
+        "distName": "cdk-pipeline-status",
+        "module": "cdk_pipeline_status"
       }
     },
     "tsc": {

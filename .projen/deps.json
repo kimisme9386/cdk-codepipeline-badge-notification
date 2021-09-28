@@ -134,11 +134,6 @@
       "type": "peer"
     },
     {
-      "name": "@aws-cdk/aws-ssm",
-      "version": "^1.100.0",
-      "type": "peer"
-    },
-    {
       "name": "@aws-cdk/core",
       "version": "^1.100.0",
       "type": "peer"
@@ -185,11 +180,6 @@
     },
     {
       "name": "@aws-cdk/aws-secretsmanager",
-      "version": "^1.100.0",
-      "type": "runtime"
-    },
-    {
-      "name": "@aws-cdk/aws-ssm",
       "version": "^1.100.0",
       "type": "runtime"
     },

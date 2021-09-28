@@ -13,10 +13,10 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.100.0',
   defaultReleaseBranch: 'main',
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
-  name: 'cdk-codepipeline-badge-notification',
+  name: 'cdk-pipeline-status',
   describe:
     'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
-  repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-status.git',
+  repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-badge-notification',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-codepipeline',
@@ -27,12 +27,11 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-codebuild',
     '@aws-cdk/aws-secretsmanager',
     '@aws-cdk/aws-iam',
-    '@aws-cdk/aws-ssm',
   ],
   devDeps: ['projen-automate-it'],
   publishToPypi: {
-    distName: 'cdk-codepipeline-badge-notification',
-    module: 'cdk_codepipeline_badge_notification',
+    distName: 'cdk-pipeline-status',
+    module: 'cdk_pipeline_status',
   },
   catalog: {
     announce: true,
@@ -112,8 +111,7 @@ gitpod.addCustomTask({
 
 /* spellchecker: disable */
 gitpod.addVscodeExtensions(
-  'dbaeumer.vscode-eslint',
-  'streetsidesoftware.code-spell-checker-spanish'
+  'dbaeumer.vscode-eslint'
 );
 
 
