@@ -20,19 +20,19 @@ export class IntegTesting {
 
     const codePipelineStatus = new CodePipelineBadgeNotification(
       stack,
-      'CodePipelineStatus',
+      'CodePipelineBadgeNotification',
       {
         pipelineArn: pipeline.pipelineArn,
         gitHubTokenFromSecretsManager: {
           secretsManagerArn:
-            'arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII',
+            `arn:aws:secretsmanager:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:secret:codepipeline/lambda/github-token-YnCnne`,
           secretKey: 'codepipeline/lambda/github-token',
         },
         notification: {
           stageName: 'production',
-          ssmSlackWebHookUrl: 'ssm_slack_webhook',
-          ssmGoogleChatWebHookUrl: 'ssm_google_chat_webhook',
-          ssmTelegramWebHookUrl: 'ssm_telegram_webhook',
+          // ssmSlackWebHookUrl: 'ssm_slack_webhook',
+          ssmGoogleChatWebHookUrl: '/chat/google/webhook',
+          ssmTelegramWebHookUrl: '/chat/telegram/webhook',
         },
       }
     );
@@ -62,19 +62,18 @@ export class IntegTesting {
         new codepipeline_actions.CodeStarConnectionsSourceAction({
           actionName: 'GitHub_Source',
           owner: 'kimisme9386',
-          repo: 'cdk-codepipeline-status',
+          repo: 'cdk-codepipeline-badge-notification',
           output: sourceOutput,
-          connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/XXxxxxxxxxxx`,
+          connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/e97c0228-6aee-46df-a0a5-8ddbd3c94679`,
           variablesNamespace: 'GitHubSourceVariables',
-          branch: 'dev',
+          branch: 'feature/google-chat-notification',
           codeBuildCloneOutput: true,
         }),
       ],
     });
 
     const project = this.createCodeBuildProjectWithinCodePipeline(
-      stack,
-      'buildspec.yml'
+      stack
     );
 
     const afterBuildArtifact = new codePipeline.Artifact();
@@ -96,14 +95,29 @@ export class IntegTesting {
   }
 
   private createCodeBuildProjectWithinCodePipeline(
-    stack: cdk.Stack,
-    buildSpecPath: string
+    stack: cdk.Stack
   ) {
     const project = new codebuild.PipelineProject(
       stack,
       'CodeBuildWithinCodePipeline',
       {
-        buildSpec: codebuild.BuildSpec.fromSourceFilename(buildSpecPath),
+        buildSpec: codebuild.BuildSpec.fromObject({
+          version: '0.2',
+          env: {
+            shell: 'bash',
+          },
+          phases: {
+            build: {
+              'on-failure': 'ABORT',
+              'commands': [
+                'echo "test build"',
+              ],
+            },
+          },
+          artifacts: {
+            files: 'imagedefinitions.json',
+          },
+        }),
         environment: {
           buildImage: codebuild.LinuxBuildImage.STANDARD_4_0,
           computeType: codebuild.ComputeType.SMALL,

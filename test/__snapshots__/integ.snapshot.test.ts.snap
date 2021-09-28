@@ -10,9 +10,31 @@ Object {
           Array [
             "https://",
             Object {
-              "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
+              "Ref": "CodePipelineBadgeNotificationBadgeBucket25847110",
             },
             ".s3-ap-northeast-1.amazonaws.com/production-latest-build.svg#1",
+          ],
+        ],
+      },
+    },
+    "CodePipelineBadgeNotificationbadgeMarkdownLink4F94BFD9": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "[![Build Status](https://",
+            Object {
+              "Ref": "CodePipelineBadgeNotificationBadgeBucket25847110",
+            },
+            ".s3-ap-northeast-1.amazonaws.com/production-latest-build.svg#1)](https://",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".console.aws.amazon.com/codesuite/codepipeline/pipelines/",
+            Object {
+              "Ref": "TestPipelineF8A74B39",
+            },
+            "/view)",
           ],
         ],
       },
@@ -35,40 +57,14 @@ Object {
         ],
       },
     },
-    "CodePipelineStatusbadgeMarkdownLink09FB99F3": Object {
-      "Value": Object {
-        "Fn::Join": Array [
-          "",
-          Array [
-            "[![Build Status](https://",
-            Object {
-              "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
-            },
-            ".s3-ap-northeast-1.amazonaws.com/production-latest-build.svg#1)](https://",
-            Object {
-              "Ref": "AWS::Region",
-            },
-            ".console.aws.amazon.com/codesuite/codepipeline/pipelines/",
-            Object {
-              "Ref": "TestPipelineF8A74B39",
-            },
-            "/view)",
-          ],
-        ],
-      },
-    },
   },
   "Parameters": Object {
-    "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "ssmGoogleChatWebHookUrl",
+    "SsmParameterValuechatgooglewebhookC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/chat/google/webhook",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "ssmSlackWebHookUrl",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
-    "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "ssmTelegramWebHookUrl",
+    "SsmParameterValuechattelegramwebhookC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/chat/telegram/webhook",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
@@ -99,7 +95,23 @@ Object {
           ],
         },
         "Source": Object {
-          "BuildSpec": "buildspec.yml",
+          "BuildSpec": "{
+  \\"version\\": \\"0.2\\",
+  \\"env\\": {
+    \\"shell\\": \\"bash\\"
+  },
+  \\"phases\\": {
+    \\"build\\": {
+      \\"on-failure\\": \\"ABORT\\",
+      \\"commands\\": [
+        \\"echo \\\\\\"test build\\\\\\"\\"
+      ]
+    }
+  },
+  \\"artifacts\\": {
+    \\"files\\": \\"imagedefinitions.json\\"
+  }
+}",
           "Type": "CODEPIPELINE",
         },
       },
@@ -261,7 +273,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":connection/XXxxxxxxxxxx",
+                    ":connection/e97c0228-6aee-46df-a0a5-8ddbd3c94679",
                   ],
                 ],
               },
@@ -278,15 +290,15 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-    "CodePipelineStatusBadgeBucketEC4C6A0A": Object {
+    "CodePipelineBadgeNotificationBadgeBucket25847110": Object {
       "DeletionPolicy": "Retain",
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
-    "CodePipelineStatusBadgeBucketPolicy5CAFDBCD": Object {
+    "CodePipelineBadgeNotificationBadgeBucketPolicy503A0E6F": Object {
       "Properties": Object {
         "Bucket": Object {
-          "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
+          "Ref": "CodePipelineBadgeNotificationBadgeBucket25847110",
         },
         "PolicyDocument": Object {
           "Statement": Array [
@@ -302,7 +314,7 @@ Object {
                   Array [
                     Object {
                       "Fn::GetAtt": Array [
-                        "CodePipelineStatusBadgeBucketEC4C6A0A",
+                        "CodePipelineBadgeNotificationBadgeBucket25847110",
                         "Arn",
                       ],
                     },
@@ -317,26 +329,26 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "CodePipelineStatusCodePipelineCodePipelineChangeAllowEventRulemycodepipelinebadgenotificationstackCodePipelineStatusCodepipelineEventLambda08199AE13DBFFF1B": Object {
+    "CodePipelineBadgeNotificationCodePipelineCodePipelineChangeAllowEventRulemycodepipelinebadgenotificationstackCodePipelineBadgeNotificationCodepipelineEventLambda81448B0114659176": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
           "Fn::GetAtt": Array [
-            "CodePipelineStatusCodepipelineEventLambda81D12435",
+            "CodePipelineBadgeNotificationCodepipelineEventLambdaBC535ED3",
             "Arn",
           ],
         },
         "Principal": "events.amazonaws.com",
         "SourceArn": Object {
           "Fn::GetAtt": Array [
-            "CodePipelineStatusCodePipelineCodePipelineChangeE4090DB6",
+            "CodePipelineBadgeNotificationCodePipelineCodePipelineChangeC7A7DA71",
             "Arn",
           ],
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "CodePipelineStatusCodePipelineCodePipelineChangeE4090DB6": Object {
+    "CodePipelineBadgeNotificationCodePipelineCodePipelineChangeC7A7DA71": Object {
       "Properties": Object {
         "EventPattern": Object {
           "detail-type": Array [
@@ -376,7 +388,7 @@ Object {
           Object {
             "Arn": Object {
               "Fn::GetAtt": Array [
-                "CodePipelineStatusCodepipelineEventLambda81D12435",
+                "CodePipelineBadgeNotificationCodepipelineEventLambdaBC535ED3",
                 "Arn",
               ],
             },
@@ -386,10 +398,10 @@ Object {
       },
       "Type": "AWS::Events::Rule",
     },
-    "CodePipelineStatusCodepipelineEventLambda81D12435": Object {
+    "CodePipelineBadgeNotificationCodepipelineEventLambdaBC535ED3": Object {
       "DependsOn": Array [
-        "CodePipelineStatusCodepipelineEventLambdaServiceRoleDefaultPolicy6AE1D470",
-        "CodePipelineStatusCodepipelineEventLambdaServiceRole6CB7440B",
+        "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRoleDefaultPolicyED989ADB",
+        "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B",
       ],
       "Properties": Object {
         "Code": Object {
@@ -408,7 +420,7 @@ Object {
                 Object {
                   "Ref": "AWS::URLSuffix",
                 },
-                "/aws-cdk/assets:55c33dd6627a772b15aa646f12952167bc615d4b2bdf0a49e7ebf2ec0e29f5d3",
+                "/aws-cdk/assets:0184d2b36924e5e7008032cf87e7ec6c42cddcfb4db37af9838d1bf6b30d59e5",
               ],
             ],
           },
@@ -417,21 +429,30 @@ Object {
           "Variables": Object {
             "BADGE_BUCKET_IMAGE_KEY_NAME": "production-latest-build.svg",
             "BADGE_BUCKET_NAME": Object {
-              "Ref": "CodePipelineStatusBadgeBucketEC4C6A0A",
+              "Ref": "CodePipelineBadgeNotificationBadgeBucket25847110",
             },
             "CODE_PIPELINE_NAME": Object {
               "Ref": "TestPipelineF8A74B39",
             },
-            "GITHUB_PERSONAL_TOKEN": "{{resolve:secretsmanager:arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII:SecretString:codepipeline/lambda/github-token::}}",
+            "GITHUB_PERSONAL_TOKEN": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  "{{resolve:secretsmanager:arn:aws:secretsmanager:ap-northeast-1:",
+                  Object {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":secret:codepipeline/lambda/github-token-YnCnne:SecretString:codepipeline/lambda/github-token::}}",
+                ],
+              ],
+            },
             "GOOGLE_CHAT_WEBHOOK_URL": Object {
-              "Ref": "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+              "Ref": "SsmParameterValuechatgooglewebhookC96584B6F00A464EAD1953AFF4B05118Parameter",
             },
-            "SLACK_WEBHOOK_URL": Object {
-              "Ref": "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
-            },
+            "SLACK_WEBHOOK_URL": "",
             "STAGE": "production",
             "TELEGRAM_WEBHOOK_URL": Object {
-              "Ref": "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+              "Ref": "SsmParameterValuechattelegramwebhookC96584B6F00A464EAD1953AFF4B05118Parameter",
             },
           },
         },
@@ -443,7 +464,7 @@ Object {
         "PackageType": "Image",
         "Role": Object {
           "Fn::GetAtt": Array [
-            "CodePipelineStatusCodepipelineEventLambdaServiceRole6CB7440B",
+            "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B",
             "Arn",
           ],
         },
@@ -464,7 +485,7 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "CodePipelineStatusCodepipelineEventLambdaServiceRole6CB7440B": Object {
+    "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -521,7 +542,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "CodePipelineStatusCodepipelineEventLambdaServiceRoleDefaultPolicy6AE1D470": Object {
+    "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRoleDefaultPolicyED989ADB": Object {
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -538,7 +559,7 @@ Object {
               "Resource": Array [
                 Object {
                   "Fn::GetAtt": Array [
-                    "CodePipelineStatusBadgeBucketEC4C6A0A",
+                    "CodePipelineBadgeNotificationBadgeBucket25847110",
                     "Arn",
                   ],
                 },
@@ -548,7 +569,7 @@ Object {
                     Array [
                       Object {
                         "Fn::GetAtt": Array [
-                          "CodePipelineStatusBadgeBucketEC4C6A0A",
+                          "CodePipelineBadgeNotificationBadgeBucket25847110",
                           "Arn",
                         ],
                       },
@@ -561,10 +582,88 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "CodePipelineStatusCodepipelineEventLambdaServiceRoleDefaultPolicy6AE1D470",
+        "PolicyName": "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRoleDefaultPolicyED989ADB",
         "Roles": Array [
           Object {
-            "Ref": "CodePipelineStatusCodepipelineEventLambdaServiceRole6CB7440B",
+            "Ref": "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CodePipelineBadgeNotificationssmGoogleChatWebHookUrlBE913797": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:aws:ssm:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter//chat/google/webhook",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CodePipelineBadgeNotificationssmGoogleChatWebHookUrlBE913797",
+        "Roles": Array [
+          Object {
+            "Ref": "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CodePipelineBadgeNotificationssmTelegramWebHookUrl98CE08BB": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:aws:ssm:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":parameter//chat/telegram/webhook",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CodePipelineBadgeNotificationssmTelegramWebHookUrl98CE08BB",
+        "Roles": Array [
+          Object {
+            "Ref": "CodePipelineBadgeNotificationCodepipelineEventLambdaServiceRole3096953B",
           },
         ],
       },
@@ -684,7 +783,7 @@ Object {
                   "Version": "1",
                 },
                 "Configuration": Object {
-                  "BranchName": "dev",
+                  "BranchName": "feature/google-chat-notification",
                   "ConnectionArn": Object {
                     "Fn::Join": Array [
                       "",
@@ -693,11 +792,11 @@ Object {
                         Object {
                           "Ref": "AWS::AccountId",
                         },
-                        ":connection/XXxxxxxxxxxx",
+                        ":connection/e97c0228-6aee-46df-a0a5-8ddbd3c94679",
                       ],
                     ],
                   },
-                  "FullRepositoryId": "kimisme9386/cdk-codepipeline-status",
+                  "FullRepositoryId": "kimisme9386/cdk-codepipeline-badge-notification",
                   "OutputArtifactFormat": "CODEBUILD_CLONE_REF",
                 },
                 "Name": "GitHub_Source",
@@ -891,7 +990,7 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":connection/XXxxxxxxxxxx",
+                    ":connection/e97c0228-6aee-46df-a0a5-8ddbd3c94679",
                   ],
                 ],
               },
