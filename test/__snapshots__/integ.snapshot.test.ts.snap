@@ -59,12 +59,12 @@ Object {
     },
   },
   "Parameters": Object {
-    "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "ssmGoogleChatWebHookUrl",
+    "SsmParameterValuechatgooglewebhookC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/chat/google/webhook",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
-      "Default": "ssmTelegramWebHookUrl",
+    "SsmParameterValuechattelegramwebhookC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/chat/telegram/webhook",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
@@ -95,7 +95,23 @@ Object {
           ],
         },
         "Source": Object {
-          "BuildSpec": "buildspec.yml",
+          "BuildSpec": "{
+  \\"version\\": \\"0.2\\",
+  \\"env\\": {
+    \\"shell\\": \\"bash\\"
+  },
+  \\"phases\\": {
+    \\"build\\": {
+      \\"on-failure\\": \\"ABORT\\",
+      \\"commands\\": [
+        \\"echo \\\\\\"test build\\\\\\"\\"
+      ]
+    }
+  },
+  \\"artifacts\\": {
+    \\"files\\": \\"imagedefinitions.json\\"
+  }
+}",
           "Type": "CODEPIPELINE",
         },
       },
@@ -138,7 +154,15 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":logs:ap-northeast-1:340227574277:log-group:/aws/codebuild/",
+                      ":logs:",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":log-group:/aws/codebuild/",
                       Object {
                         "Ref": "CodeBuildWithinCodePipeline0585DD46",
                       },
@@ -153,7 +177,15 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":logs:ap-northeast-1:340227574277:log-group:/aws/codebuild/",
+                      ":logs:",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":log-group:/aws/codebuild/",
                       Object {
                         "Ref": "CodeBuildWithinCodePipeline0585DD46",
                       },
@@ -180,7 +212,15 @@ Object {
                     Object {
                       "Ref": "AWS::Partition",
                     },
-                    ":codebuild:ap-northeast-1:340227574277:report-group/",
+                    ":codebuild:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":report-group/",
                     Object {
                       "Ref": "CodeBuildWithinCodePipeline0585DD46",
                     },
@@ -323,7 +363,15 @@ Object {
                   Object {
                     "Ref": "AWS::Partition",
                   },
-                  ":codepipeline:ap-northeast-1:340227574277:",
+                  ":codepipeline:",
+                  Object {
+                    "Ref": "AWS::Region",
+                  },
+                  ":",
+                  Object {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":",
                   Object {
                     "Ref": "TestPipelineF8A74B39",
                   },
@@ -361,11 +409,18 @@ Object {
             "Fn::Join": Array [
               "",
               Array [
-                "340227574277.dkr.ecr.ap-northeast-1.",
+                Object {
+                  "Ref": "AWS::AccountId",
+                },
+                ".dkr.ecr.",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ".",
                 Object {
                   "Ref": "AWS::URLSuffix",
                 },
-                "/aws-cdk/assets:f61ae7e464b891168bd83c79e167c5ce214ec3f58950d43e4d24043986772410",
+                "/aws-cdk/assets:0184d2b36924e5e7008032cf87e7ec6c42cddcfb4db37af9838d1bf6b30d59e5",
               ],
             ],
           },
@@ -392,12 +447,12 @@ Object {
               ],
             },
             "GOOGLE_CHAT_WEBHOOK_URL": Object {
-              "Ref": "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+              "Ref": "SsmParameterValuechatgooglewebhookC96584B6F00A464EAD1953AFF4B05118Parameter",
             },
             "SLACK_WEBHOOK_URL": "",
             "STAGE": "production",
             "TELEGRAM_WEBHOOK_URL": Object {
-              "Ref": "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+              "Ref": "SsmParameterValuechattelegramwebhookC96584B6F00A464EAD1953AFF4B05118Parameter",
             },
           },
         },
@@ -652,7 +707,11 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::340227574277:root",
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
                     ],
                   ],
                 },
@@ -724,7 +783,7 @@ Object {
                   "Version": "1",
                 },
                 "Configuration": Object {
-                  "BranchName": "dev",
+                  "BranchName": "feature/google-chat-notification",
                   "ConnectionArn": Object {
                     "Fn::Join": Array [
                       "",
@@ -900,7 +959,11 @@ Object {
                       Object {
                         "Ref": "AWS::Partition",
                       },
-                      ":iam::340227574277:root",
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
                     ],
                   ],
                 },

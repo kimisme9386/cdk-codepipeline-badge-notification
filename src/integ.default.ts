@@ -24,8 +24,6 @@ export class IntegTesting {
       {
         pipelineArn: pipeline.pipelineArn,
         gitHubTokenFromSecretsManager: {
-          // secretsManagerArn:
-          //   'arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII',
           secretsManagerArn:
             `arn:aws:secretsmanager:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:secret:codepipeline/lambda/github-token-YnCnne`,
           secretKey: 'codepipeline/lambda/github-token',
@@ -66,18 +64,16 @@ export class IntegTesting {
           owner: 'kimisme9386',
           repo: 'cdk-codepipeline-badge-notification',
           output: sourceOutput,
-          // connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/XXxxxxxxxxxx`,
           connectionArn: `arn:aws:codestar-connections:ap-northeast-1:${cdk.Aws.ACCOUNT_ID}:connection/e97c0228-6aee-46df-a0a5-8ddbd3c94679`,
           variablesNamespace: 'GitHubSourceVariables',
-          branch: 'dev',
+          branch: 'feature/google-chat-notification',
           codeBuildCloneOutput: true,
         }),
       ],
     });
 
     const project = this.createCodeBuildProjectWithinCodePipeline(
-      stack,
-      'buildspec.yml'
+      stack
     );
 
     const afterBuildArtifact = new codePipeline.Artifact();
@@ -99,14 +95,29 @@ export class IntegTesting {
   }
 
   private createCodeBuildProjectWithinCodePipeline(
-    stack: cdk.Stack,
-    buildSpecPath: string
+    stack: cdk.Stack
   ) {
     const project = new codebuild.PipelineProject(
       stack,
       'CodeBuildWithinCodePipeline',
       {
-        buildSpec: codebuild.BuildSpec.fromSourceFilename(buildSpecPath),
+        buildSpec: codebuild.BuildSpec.fromObject({
+          version: '0.2',
+          env: {
+            shell: 'bash',
+          },
+          phases: {
+            build: {
+              'on-failure': 'ABORT',
+              'commands': [
+                'echo "test build"',
+              ],
+            },
+          },
+          artifacts: {
+            files: 'imagedefinitions.json',
+          },
+        }),
         environment: {
           buildImage: codebuild.LinuxBuildImage.STANDARD_4_0,
           computeType: codebuild.ComputeType.SMALL,
