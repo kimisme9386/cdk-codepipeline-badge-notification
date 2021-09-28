@@ -59,8 +59,16 @@ Object {
     },
   },
   "Parameters": Object {
+    "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "ssmGoogleChatWebHookUrl",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
       "Default": "ssmSlackWebHookUrl",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "ssmTelegramWebHookUrl",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
@@ -415,12 +423,16 @@ Object {
               "Ref": "TestPipelineF8A74B39",
             },
             "GITHUB_PERSONAL_TOKEN": "{{resolve:secretsmanager:arn:aws:secretsmanager:ap-northeast-1:482631629698:secret:codepipeline/lambda/github-token-YWWmII:SecretString:codepipeline/lambda/github-token::}}",
-            "GOOGLE_CHAT_WEBHOOK_URL": "",
+            "GOOGLE_CHAT_WEBHOOK_URL": Object {
+              "Ref": "SsmParameterValuessmGoogleChatWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+            },
             "SLACK_WEBHOOK_URL": Object {
               "Ref": "SsmParameterValuessmSlackWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
             },
             "STAGE": "production",
-            "TELEGRAM_WEBHOOK_URL": "",
+            "TELEGRAM_WEBHOOK_URL": Object {
+              "Ref": "SsmParameterValuessmTelegramWebHookUrlC96584B6F00A464EAD1953AFF4B05118Parameter",
+            },
           },
         },
         "ImageConfig": Object {
