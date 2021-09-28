@@ -43,10 +43,10 @@ export const handler = async (
 ): Promise<void> => {
   console.info('Debug event\n' + JSON.stringify(event, null, 2));
   const state = event.detail.state;
-  const stageTitle = process.env.STAGE ? `[${process.env.STAGE}:] \n` : '';
+  const stageTitle = process.env.STAGE ? `[${process.env.STAGE}] \n` : '';
   const subject = `CodePIpeline Name: ${event.detail.pipeline} \n`;
-  const stateMessage = getStateMessage(state, event['detail-type']);
   const codePipelineLink = `https://ap-northeast-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/${event.detail.pipeline}/view`;
+  const stateMessage = getStateMessage(state, event['detail-type'], codePipelineLink);
   const slackUrl = (process.env.SLACK_WEBHOOK_URL as string) ?? '';
   const googleChatUrl = (process.env.GOOGLE_CHAT_WEBHOOK_URL as string) ?? '';
   const telegramUrl = (process.env.TELEGRAM_WEBHOOK_URL as string) ?? '';
@@ -63,15 +63,15 @@ export const handler = async (
     (process.env.GITHUB_PERSONAL_TOKEN as string) ?? '';
 
   if (slackUrl) {
-    await sendMessageToWebHook(ChatProvider.SLACK, slackUrl, `${stageTitle}${subject}`);
+    await sendMessageToWebHook(ChatProvider.SLACK, slackUrl, `${stageTitle}${subject}${stateMessage}`);
   }
 
   if (googleChatUrl) {
-    await sendMessageToWebHook(ChatProvider.GOOGLE_CHAT, googleChatUrl, `${stageTitle}${subject}`);
+    await sendMessageToWebHook(ChatProvider.GOOGLE_CHAT, googleChatUrl, `${stageTitle}${subject}${stateMessage}`);
   }
 
   if (telegramUrl) {
-    await sendMessageToWebHook(ChatProvider.TELEGRAM, telegramUrl, `${stageTitle}${subject}`);
+    await sendMessageToWebHook(ChatProvider.TELEGRAM, telegramUrl, `${stageTitle}${subject}${stateMessage}`);
   }
 
   let imageUrl: string | null = null;
@@ -153,19 +153,20 @@ export const handler = async (
 const getStateMessage = (
   state: string,
   title: string,
+  codePipelineLink: string,
 ): string => {
   let returnMessage = '';
   switch (state) {
     case CodePipelineState.STARTED:
-      returnMessage = `${title}: ${state} 🚀`;
+      returnMessage = `${title}: ${state} 🚀 \n `;
       break;
 
     case CodePipelineState.SUCCEEDED:
-      returnMessage = `${title}: ${state} ✅`;
+      returnMessage = `${title}: ${state} ✅ \n `;
       break;
 
     case CodePipelineState.FAILED:
-      returnMessage = `${title}: ${state} ❌`;
+      returnMessage = `${title}: ${state} ❌ \n See more details: ${codePipelineLink} \n `;
       break;
 
     default:
@@ -195,7 +196,7 @@ const sendMessageToWebHook = async (
           .create({
             headers: { 'Context-Type': 'application/json; charset=UTF-8' },
           })
-          .get(`${webhookRUL}&text=${message}`);
+          .get(`${webhookRUL}&text=${encodeURIComponent(message)}`);
       break;
 
     default:
