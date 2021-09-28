@@ -10,7 +10,10 @@
 
 - Update GitHub commit status when AWS CodePipeline state change
 
-- Slack notification when AWS CodePipeline state change
+- Notification for chat bot provider
+  - Slack
+  - Google
+  - Telegram
 
 ## Usage
 
@@ -40,10 +43,14 @@ new CodePipelineBadgeNotification(stack, 'CodePipelineBadgeNotification', {
   },
   notification: {
     stageName: 'production',
-    slackWebHookUrl: 'slack url webhook',
+    ssmSlackWebHookUrl: '/chat/google/slack',
+    ssmGoogleChatWebHookUrl: '/chat/google/webhook',
+    ssmTelegramWebHookUrl: '/chat/telegram/webhook',
   },
 });
 ```
+
+> :warning: telegram webhook url from ssm parameter which the URL is not include `text` query string
 
 > gitHubTokenFromSecretsManager and notification is optional
 
