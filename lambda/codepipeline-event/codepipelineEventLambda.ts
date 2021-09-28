@@ -43,7 +43,9 @@ export const handler = async (
 ): Promise<void> => {
   console.info('Debug event\n' + JSON.stringify(event, null, 2));
   const state = event.detail.state;
-  const subject = `project: ${event.detail.pipeline} \n ${event['detail-type']}: ${state}`;
+  const stageTitle = process.env.STAGE ? `[${process.env.STAGE}:] \n` : '';
+  const subject = `CodePIpeline Name: ${event.detail.pipeline} \n`;
+  const stateMessage = getStateMessage(state, event['detail-type']);
   const codePipelineLink = `https://ap-northeast-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/${event.detail.pipeline}/view`;
   const slackUrl = (process.env.SLACK_WEBHOOK_URL as string) ?? '';
   const googleChatUrl = (process.env.GOOGLE_CHAT_WEBHOOK_URL as string) ?? '';
@@ -59,7 +61,6 @@ export const handler = async (
   const codePipelineName = process.env.CODE_PIPELINE_NAME as string;
   const githubPersonalToken =
     (process.env.GITHUB_PERSONAL_TOKEN as string) ?? '';
-  const stageTitle = process.env.STAGE ? `${process.env.STAGE}: ` : '';
 
   if (slackUrl) {
     await sendMessageToWebHook(ChatProvider.SLACK, slackUrl, `${stageTitle}${subject}`);
@@ -148,6 +149,30 @@ export const handler = async (
     console.log(respSourceActionData);
   }
 };
+
+const getStateMessage = (
+  state: string,
+  title: string,
+): string => {
+  let returnMessage = '';
+  switch (state) {
+    case CodePipelineState.STARTED:
+      returnMessage = `${title}: ${state} 🚀`;
+      break;
+
+    case CodePipelineState.SUCCEEDED:
+      returnMessage = `${title}: ${state} ✅`;
+      break;
+
+    case CodePipelineState.FAILED:
+      returnMessage = `${title}: ${state} ❌`;
+      break;
+
+    default:
+      returnMessage = `${title}: ${state}`;
+  }
+  return returnMessage;
+}
 
 const sendMessageToWebHook = async (
   serviceType: string,
