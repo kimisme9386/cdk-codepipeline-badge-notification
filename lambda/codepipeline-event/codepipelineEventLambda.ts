@@ -7,6 +7,12 @@ import { Callback, CodePipelineCloudWatchEvent, Context } from 'aws-lambda';
 import { default as axios } from 'axios';
 import url from 'url';
 
+enum ChatProvider {
+  SLACK = 'slack',
+  GOOGLE_CHAT = 'google_chat',
+  TELEGRAM = 'telegram',
+}
+
 enum CodePipelineState {
   STARTED = 'STARTED',
   RESUMED = 'RESUMED',
@@ -39,7 +45,9 @@ export const handler = async (
   const state = event.detail.state;
   const subject = `project: ${event.detail.pipeline} \n ${event['detail-type']}: ${state}`;
   const codePipelineLink = `https://ap-northeast-1.console.aws.amazon.com/codesuite/codepipeline/pipelines/${event.detail.pipeline}/view`;
-  const webhookUrl = (process.env.SLACK_WEBHOOK_URL as string) ?? '';
+  const slackUrl = (process.env.SLACK_WEBHOOK_URL as string) ?? '';
+  const googleChatUrl = (process.env.GOOGLE_CHAT_WEBHOOK_URL as string) ?? '';
+  const telegramUrl = (process.env.TELEGRAM_WEBHOOK_URL as string) ?? '';
   const badgeBucket = process.env.BADGE_BUCKET_NAME as string;
   const badgeBucketImageKeyName = process.env
     .BADGE_BUCKET_IMAGE_KEY_NAME as string;
@@ -53,13 +61,16 @@ export const handler = async (
     (process.env.GITHUB_PERSONAL_TOKEN as string) ?? '';
   const stageTitle = process.env.STAGE ? `${process.env.STAGE}: ` : '';
 
-  if (webhookUrl) {
-    const respData = await axios
-      .create({
-        headers: { 'Context-Type': 'application/json' },
-      })
-      .post(webhookUrl, { text: `${stageTitle}${subject}` });
-    console.log(`webhookUrl response:\n ${respData}`);
+  if (slackUrl) {
+    await sendMessageToWebHook(ChatProvider.SLACK, slackUrl, `${stageTitle}${subject}`);
+  }
+
+  if (googleChatUrl) {
+    await sendMessageToWebHook(ChatProvider.GOOGLE_CHAT, googleChatUrl, `${stageTitle}${subject}`);
+  }
+
+  if (telegramUrl) {
+    await sendMessageToWebHook(ChatProvider.TELEGRAM, telegramUrl, `${stageTitle}${subject}`);
   }
 
   let imageUrl: string | null = null;
@@ -137,6 +148,36 @@ export const handler = async (
     console.log(respSourceActionData);
   }
 };
+
+const sendMessageToWebHook = async (
+  serviceType: string,
+  webhookRUL: string,
+  message: string,
+):Promise<void> => {
+  let respData: string;
+  switch (serviceType) {
+    case ChatProvider.SLACK:
+    case ChatProvider.GOOGLE_CHAT:
+      respData = await axios
+          .create({
+            headers: { 'Context-Type': 'application/json; charset=UTF-8' },
+          })
+          .post(webhookRUL, { text: message });      
+    break;
+
+    case ChatProvider.TELEGRAM:
+      respData = await axios
+          .create({
+            headers: { 'Context-Type': 'application/json; charset=UTF-8' },
+          })
+          .get(`${webhookRUL}&text=${message}`);
+      break;
+
+    default:
+      respData = '';
+  }
+  console.log(`webhookUrl response:\n ${respData}`);
+}
 
 const getPipelineSourceActionData = async (
   executionId: string,
