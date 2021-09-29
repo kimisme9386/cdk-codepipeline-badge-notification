@@ -138,6 +138,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
           CODE_PIPELINE_NAME: codePipelineName,
           GITHUB_PERSONAL_TOKEN: gitHubToken ? `${gitHubToken}` : '',
         },
+        timeout: cdk.Duration.seconds(30),
       }
     );
 
