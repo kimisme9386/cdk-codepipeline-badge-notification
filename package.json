@@ -1,5 +1,5 @@
 {
-  "name": "cdk-pipeline-status",
+  "name": "cdk-codepipeline-badge-notification-notification",
   "repository": {
     "type": "git",
     "url": "https://github.com/kimisme9386/cdk-codepipeline-badge-notification"
@@ -134,8 +134,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk-pipeline-status",
-        "module": "cdk_pipeline_status"
+        "distName": "cdk-codepipeline-badge-notification-notification",
+        "module": "cdk_codepipeline_badge_notification_notification"
       }
     },
     "tsc": {
