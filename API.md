@@ -4,20 +4,20 @@
 
 Name|Description
 ----|-----------
-[CodePipelineBadgeNotification](#cdk-codepipeline-badge-notification-notification-codepipelinebadgenotification)|*No description*
+[CodePipelineBadgeNotification](#cdk-codepipeline-badge-notification-codepipelinebadgenotification)|*No description*
 
 
 **Structs**
 
 Name|Description
 ----|-----------
-[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-notification-codepipelinebadgenotificationprops)|*No description*
-[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-notification-githubtokenfromsecretsmanager)|*No description*
-[Notification](#cdk-codepipeline-badge-notification-notification-notification)|*No description*
+[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops)|*No description*
+[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager)|*No description*
+[Notification](#cdk-codepipeline-badge-notification-notification)|*No description*
 
 
 
-## class CodePipelineBadgeNotification 🔹 <a id="cdk-codepipeline-badge-notification-notification-codepipelinebadgenotification"></a>
+## class CodePipelineBadgeNotification 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinebadgenotification"></a>
 
 
 
@@ -35,10 +35,10 @@ new CodePipelineBadgeNotification(scope: Construct, id: string, props: CodePipel
 
 * **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
-* **props** (<code>[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-notification-codepipelinebadgenotificationprops)</code>)  *No description*
+* **props** (<code>[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops)</code>)  *No description*
   * **pipelineArn** (<code>string</code>)  AWS CodePipeline arn. 
-  * **gitHubTokenFromSecretsManager** (<code>[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-notification-githubtokenfromsecretsmanager)</code>)  AWS Secret Manager id or arn. __*Optional*__
-  * **notification** (<code>[Notification](#cdk-codepipeline-badge-notification-notification-notification)</code>)  Notification. __*Optional*__
+  * **gitHubTokenFromSecretsManager** (<code>[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager)</code>)  AWS Secret Manager id or arn. __*Optional*__
+  * **notification** (<code>[Notification](#cdk-codepipeline-badge-notification-notification)</code>)  Notification. __*Optional*__
 
 
 
@@ -52,7 +52,7 @@ Name | Type | Description
 
 
 
-## struct CodePipelineBadgeNotificationProps 🔹 <a id="cdk-codepipeline-badge-notification-notification-codepipelinebadgenotificationprops"></a>
+## struct CodePipelineBadgeNotificationProps 🔹 <a id="cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops"></a>
 
 
 
@@ -62,12 +62,12 @@ Name | Type | Description
 Name | Type | Description 
 -----|------|-------------
 **pipelineArn**🔹 | <code>string</code> | AWS CodePipeline arn.
-**gitHubTokenFromSecretsManager**?🔹 | <code>[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-notification-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
-**notification**?🔹 | <code>[Notification](#cdk-codepipeline-badge-notification-notification-notification)</code> | Notification.<br/>__*Optional*__
+**gitHubTokenFromSecretsManager**?🔹 | <code>[GitHubTokenFromSecretsManager](#cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager)</code> | AWS Secret Manager id or arn.<br/>__*Optional*__
+**notification**?🔹 | <code>[Notification](#cdk-codepipeline-badge-notification-notification)</code> | Notification.<br/>__*Optional*__
 
 
 
-## struct GitHubTokenFromSecretsManager 🔹 <a id="cdk-codepipeline-badge-notification-notification-githubtokenfromsecretsmanager"></a>
+## struct GitHubTokenFromSecretsManager 🔹 <a id="cdk-codepipeline-badge-notification-githubtokenfromsecretsmanager"></a>
 
 
 
@@ -81,7 +81,7 @@ Name | Type | Description
 
 
 
-## struct Notification 🔹 <a id="cdk-codepipeline-badge-notification-notification-notification"></a>
+## struct Notification 🔹 <a id="cdk-codepipeline-badge-notification-notification"></a>
 
 
 

@@ -12,8 +12,9 @@ const project = new AwsCdkConstructLibrary({
   authorUrl: 'https://9incloud.com/',
   cdkVersion: '1.100.0',
   defaultReleaseBranch: 'main',
+  keywords: ['aws', 'cdk', 'codepipeline', 'badge', 'notification'],
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
-  name: 'cdk-codepipeline-badge-notification-notification',
+  name: 'cdk-codepipeline-badge-notification',
   describe:
     'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
   repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-badge-notification',
@@ -31,8 +32,8 @@ const project = new AwsCdkConstructLibrary({
   ],
   devDeps: ['projen-automate-it'],
   publishToPypi: {
-    distName: 'cdk-codepipeline-badge-notification-notification',
-    module: 'cdk_codepipeline_badge_notification_notification',
+    distName: 'cdk-codepipeline-badge-notification',
+    module: 'cdk_codepipeline_badge_notification',
   },
   catalog: {
     announce: true,

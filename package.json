@@ -1,5 +1,5 @@
 {
-  "name": "cdk-codepipeline-badge-notification-notification",
+  "name": "cdk-codepipeline-badge-notification",
   "repository": {
     "type": "git",
     "url": "https://github.com/kimisme9386/cdk-codepipeline-badge-notification"
@@ -84,7 +84,11 @@
   },
   "bundledDependencies": [],
   "keywords": [
-    "cdk"
+    "aws",
+    "badge",
+    "cdk",
+    "codepipeline",
+    "notification"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
@@ -134,8 +138,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk-codepipeline-badge-notification-notification",
-        "module": "cdk_codepipeline_badge_notification_notification"
+        "distName": "cdk-codepipeline-badge-notification",
+        "module": "cdk_codepipeline_badge_notification"
       }
     },
     "tsc": {
