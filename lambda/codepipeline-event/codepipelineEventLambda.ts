@@ -23,8 +23,8 @@ enum CodePipelineState {
 }
 
 interface SourceActionData {
-  owner: string;
-  repository: string;
+  owner?: string;
+  repository?: string;
   sha: string;
 }
 
@@ -126,7 +126,7 @@ export const handler = async (
 
   console.log(`debug state: ${state}`);
   console.log(`debug sourceActionData: ${JSON.stringify(sourceActionData)}`);
-  if (githubPersonalToken && sourceActionData && sourceActionState) {
+  if (githubPersonalToken && sourceActionState && sourceActionData && sourceActionData.owner && sourceActionData.repository) {
     console.log(
       `sourceActionCommitStatusUrl:\n https://api.github.com/repos/${sourceActionData?.owner}/${sourceActionData?.repository}/statuses/${sourceActionData?.sha}`
     );
@@ -224,16 +224,23 @@ const getPipelineSourceActionData = async (
     : null;
 
   if (artifactRevision) {
-    const revisionURL = artifactRevision.revisionUrl;
     const sha = artifactRevision.revisionId;
-    const fullRepositoryId = new url.URL(
-      revisionURL as string
-    ).searchParams.get('FullRepositoryId') as string;
+
+    const revisionURL = artifactRevision?.revisionUrl;
+    let repoInfo = {};
+    if (revisionURL) {
+      const fullRepositoryId = new url.URL(
+        revisionURL as string
+      ).searchParams.get('FullRepositoryId') as string;
+      repoInfo = {
+        owner: fullRepositoryId ? fullRepositoryId.split('/')[0] : '',
+      repository: fullRepositoryId ? fullRepositoryId.split('/')[1] : '',
+      }
+    }
 
     return {
-      owner: fullRepositoryId ? fullRepositoryId.split('/')[0] : '',
-      repository: fullRepositoryId ? fullRepositoryId.split('/')[1] : '',
       sha: sha ? sha : '',
+      ...repoInfo
     };
   }
 
