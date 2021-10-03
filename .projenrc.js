@@ -86,6 +86,7 @@ project.gitignore.include(...common_include);
 const gitpodPrebuild = project.addTask('gitpod:prebuild', {
   description: 'Prebuild setup for Gitpod',
 });
+gitpodPrebuild.exec('npm -g i aws-cdk');
 gitpodPrebuild.exec('yarn install --frozen-lockfile --check-files');
 
 let gitpod = new Gitpod(project, {

@@ -260,6 +260,9 @@
       "description": "Prebuild setup for Gitpod",
       "steps": [
         {
+          "exec": "npm -g i aws-cdk"
+        },
+        {
           "exec": "yarn install --frozen-lockfile --check-files"
         }
       ]
