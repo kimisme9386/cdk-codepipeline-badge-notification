@@ -49,7 +49,7 @@ const project = new AwsCdkConstructLibrary({
       secret: AUTOMATION_TOKEN,
     },
     ignoreProjen: false,
-  }
+  },
 });
 
 project.eslint.addRules({
