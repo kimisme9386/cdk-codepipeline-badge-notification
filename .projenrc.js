@@ -43,13 +43,13 @@ const project = new AwsCdkConstructLibrary({
     secret: 'GITHUB_TOKEN',
     allowedUsernames: ['kimisme9386-bot'],
   },
-  depsUpgrade: DependenciesUpgradeMechanism.githubWorkflow({
+  depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve'],
       secret: AUTOMATION_TOKEN,
     },
     ignoreProjen: false,
-  }),
+  }
 });
 
 project.eslint.addRules({
