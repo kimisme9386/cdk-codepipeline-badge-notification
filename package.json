@@ -23,6 +23,8 @@
     "publish:npm": "npx projen publish:npm",
     "publish:pypi": "npx projen publish:pypi",
     "docgen": "npx projen docgen",
+    "cdk:diff-integ": "npx projen cdk:diff-integ",
+    "cdk:deploy-integ": "npx projen cdk:deploy-integ",
     "gitpod:prebuild": "npx projen gitpod:prebuild",
     "release": "npx projen release",
     "upgrade": "npx projen upgrade",

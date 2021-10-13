@@ -82,6 +82,20 @@ const common_include = ['/lambda/codepipeline-event/tsconfig.json'];
 project.npmignore.include(...common_include);
 project.gitignore.include(...common_include);
 
+// integration test
+const cdkDiffInteg = project.addTask('cdk:diff-integ', {
+  description: 'cdk diff for integration test',
+});
+
+cdkDiffInteg.exec('cdk diff --app "npx ts-node --prefer-ts-exts src/integ.default.ts" -R --require-approval never');
+
+const cdkDeployInteg = project.addTask('cdk:deploy-integ', {
+  description: 'cdk diff for integration test',
+});
+
+cdkDeployInteg.exec('cdk deploy --app "npx ts-node --prefer-ts-exts src/integ.default.ts" -R --require-approval never');
+
+
 // gitpod
 const gitpodPrebuild = project.addTask('gitpod:prebuild', {
   description: 'Prebuild setup for Gitpod',
