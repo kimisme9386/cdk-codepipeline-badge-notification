@@ -1,13 +1,12 @@
 const {
-  AwsCdkConstructLibrary,
-  DependenciesUpgradeMechanism,
+  awscdk,
   Gitpod,
   DevEnvironmentDockerImage,
 } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 
-const project = new AwsCdkConstructLibrary({
+const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Chris Yang',
   authorUrl: 'https://9incloud.com/',
   cdkVersion: '1.100.0',
