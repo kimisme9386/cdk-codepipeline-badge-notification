@@ -21,8 +21,8 @@ Name|Description
 
 
 
-__Implements__: [IConstruct](#constructs-iconstruct), [IDependable](#constructs-idependable)
-__Extends__: [Construct](#constructs-construct)
+__Implements__: [IConstruct](#constructs-iconstruct), [IConstruct](#aws-cdk-core-iconstruct), [IConstruct](#constructs-iconstruct), [IDependable](#aws-cdk-core-idependable)
+__Extends__: [Construct](#aws-cdk-core-construct)
 
 ### Initializer
 
@@ -33,7 +33,7 @@ __Extends__: [Construct](#constructs-construct)
 new CodePipelineBadgeNotification(scope: Construct, id: string, props: CodePipelineBadgeNotificationProps)
 ```
 
-* **scope** (<code>[Construct](#constructs-construct)</code>)  *No description*
+* **scope** (<code>[Construct](#aws-cdk-core-construct)</code>)  *No description*
 * **id** (<code>string</code>)  *No description*
 * **props** (<code>[CodePipelineBadgeNotificationProps](#cdk-codepipeline-badge-notification-codepipelinebadgenotificationprops)</code>)  *No description*
   * **pipelineArn** (<code>string</code>)  AWS CodePipeline arn. 

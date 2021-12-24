@@ -24,10 +24,6 @@ jobs:
         run: |-
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.2.0
-        with:
-          node-version: 14.17.0
       - name: Install dependencies
         run: yarn install --check-files --frozen-lockfile
       - name: release
@@ -43,7 +39,7 @@ jobs:
           name: dist
           path: dist
     container:
-      image: jsii/superchain:1-buster-slim-node14
+      image: jsii/superchain:1-buster-slim
   release_github:
     name: Publish to GitHub Releases
     needs: release
@@ -52,9 +48,6 @@ jobs:
       contents: write
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
@@ -78,9 +71,6 @@ jobs:
       contents: read
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
@@ -92,6 +82,8 @@ jobs:
           NPM_DIST_TAG: latest
           NPM_REGISTRY: registry.npmjs.org
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    container:
+      image: jsii/superchain:1-buster-slim-node14
   release_pypi:
     name: Publish to PyPI
     needs: release
@@ -100,12 +92,6 @@ jobs:
       contents: read
     if: needs.release.outputs.latest_commit == github.sha
     steps:
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3
       - name: Download build artifacts
         uses: actions/download-artifact@v2
         with:
@@ -116,3 +102,5 @@ jobs:
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+    container:
+      image: jsii/superchain:1-buster-slim-node14

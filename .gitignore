@@ -2,7 +2,6 @@
 !/.gitattributes
 !/.projen/tasks.json
 !/.projen/deps.json
-!/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
 !/.github/workflows/auto-approve.yml
 !/.github/workflows/stale.yml
@@ -40,7 +39,6 @@ junit.xml
 /dist/changelog.md
 /dist/version.txt
 !/.github/workflows/release.yml
-!/.github/workflows/release-cdkv1.yml
 !/.mergify.yml
 !/.github/pull_request_template.md
 !/test/
@@ -52,7 +50,6 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
-!/cdk.json
 cdk.out
 cdk.context.json
 images
@@ -62,4 +59,3 @@ lambda/codepipeline-event/dist
 !/lambda/codepipeline-event/tsconfig.json
 !/.gitpod.yml
 !/.github/workflows/upgrade-main.yml
-!/.github/workflows/upgrade-cdkv1.yml

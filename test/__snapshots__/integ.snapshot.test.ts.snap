@@ -59,11 +59,6 @@ Object {
     },
   },
   "Parameters": Object {
-    "BootstrapVersion": Object {
-      "Default": "/cdk-bootstrap/hnb659fds/version",
-      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
-      "Type": "AWS::SSM::Parameter::Value<String>",
-    },
     "SsmParameterValuechatgooglewebhookC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
       "Default": "/chat/google/webhook",
       "Type": "AWS::SSM::Parameter::Value<String>",
@@ -240,7 +235,7 @@ Object {
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject",
+                "s3:PutObject*",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -411,7 +406,23 @@ Object {
       "Properties": Object {
         "Code": Object {
           "ImageUri": Object {
-            "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:5923948c34afc285632b79443c6753c2e1d7bc6ac4b3ff520dfc1789012e547f",
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Ref": "AWS::AccountId",
+                },
+                ".dkr.ecr.",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ".",
+                Object {
+                  "Ref": "AWS::URLSuffix",
+                },
+                "/aws-cdk/assets:f1cbd739dc054b31a66a225c969e8fc69e196252a88e0e624ec4afa9f41d12d9",
+              ],
+            ],
           },
         },
         "Environment": Object {
@@ -542,7 +553,7 @@ Object {
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject",
+                "s3:PutObject*",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -874,7 +885,7 @@ Object {
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject",
+                "s3:PutObject*",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -991,7 +1002,7 @@ Object {
                 "s3:GetBucket*",
                 "s3:List*",
                 "s3:DeleteObject*",
-                "s3:PutObject",
+                "s3:PutObject*",
                 "s3:Abort*",
               ],
               "Effect": "Allow",
@@ -1047,33 +1058,6 @@ Object {
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-  },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                  ],
-                  Object {
-                    "Ref": "BootstrapVersion",
-                  },
-                ],
-              },
-            ],
-          },
-          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
-        },
-      ],
     },
   },
 }
