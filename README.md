@@ -12,7 +12,7 @@
 
 - Notification for chat bot provider
   - Slack
-  - Google
+  - Google Chat
   - Telegram
 
 ## Usage
