@@ -10,7 +10,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Chris Yang',
   authorUrl: 'https://9incloud.com/',
   cdkVersion: '1.100.0',
+  majorVersion: 2,
   defaultReleaseBranch: 'main',
+  releaseBranches: {
+    cdkv1: { npmDistTag: 'cdkv1', majorVersion: 1 },
+  },
   keywords: ['aws', 'cdk', 'codepipeline', 'badge', 'notification'],
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'cdk-codepipeline-badge-notification',
