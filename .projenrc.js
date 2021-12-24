@@ -2,6 +2,7 @@ const {
   awscdk,
   Gitpod,
   DevEnvironmentDockerImage,
+  JsonFile,
 } = require('projen');
 
 const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
@@ -9,28 +10,20 @@ const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Chris Yang',
   authorUrl: 'https://9incloud.com/',
-  cdkVersion: '1.100.0',
+  cdkVersion: '2.1.0',
+  majorVersion: 2,
   defaultReleaseBranch: 'main',
+  releaseBranches: {
+    cdkv1: { npmDistTag: 'cdkv1', majorVersion: 0 },
+  },
+  workflowNodeVersion: '14.17.0',
   keywords: ['aws', 'cdk', 'codepipeline', 'badge', 'notification'],
   jsiiFqn: 'projen.AwsCdkConstructLibrary',
   name: 'cdk-codepipeline-badge-notification',
   describe:
     'Create AWS CodePipeline badge, GitHub commit status, slack notification for AWS CDK',
   repositoryUrl: 'https://github.com/kimisme9386/cdk-codepipeline-badge-notification',
-  cdkDependencies: [
-    '@aws-cdk/core',
-    '@aws-cdk/aws-codepipeline',
-    '@aws-cdk/aws-lambda',
-    '@aws-cdk/aws-events-targets',
-    '@aws-cdk/aws-s3',
-    '@aws-cdk/aws-codepipeline-actions',
-    '@aws-cdk/aws-codebuild',
-    '@aws-cdk/aws-secretsmanager',
-    '@aws-cdk/aws-iam',
-    '@aws-cdk/aws-ssm',
-  ],
-  devDeps: ['projen-automate-it'],
-  publishToPypi: {
+  python: {
     distName: 'cdk-codepipeline-badge-notification',
     module: 'cdk_codepipeline_badge_notification',
   },
@@ -48,6 +41,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
       secret: AUTOMATION_TOKEN,
     },
     ignoreProjen: false,
+  },
+});
+
+new JsonFile(project, 'cdk.json', {
+  obj: {
+    app: 'npx ts-node --prefer-ts-exts src/integ.default.ts',
   },
 });
 
@@ -100,6 +99,7 @@ const gitpodPrebuild = project.addTask('gitpod:prebuild', {
   description: 'Prebuild setup for Gitpod',
 });
 gitpodPrebuild.exec('npm -g i aws-cdk');
+gitpodPrebuild.exec('npx projen upgrade');
 gitpodPrebuild.exec('yarn install --frozen-lockfile --check-files');
 
 let gitpod = new Gitpod(project, {

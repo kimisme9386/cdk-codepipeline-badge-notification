@@ -1,7 +1,9 @@
-import * as codebuild from '@aws-cdk/aws-codebuild';
-import * as codePipeline from '@aws-cdk/aws-codepipeline';
-import * as codepipeline_actions from '@aws-cdk/aws-codepipeline-actions';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
+import {
+  aws_codebuild as codebuild,
+  aws_codepipeline as codePipeline,
+  aws_codepipeline_actions as codepipeline_actions,
+} from 'aws-cdk-lib';
 import { CodePipelineBadgeNotification } from './index';
 
 export class IntegTesting {

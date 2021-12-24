@@ -1,11 +1,14 @@
 import * as path from 'path';
-import * as codePipeline from '@aws-cdk/aws-codepipeline';
-import * as targets from '@aws-cdk/aws-events-targets';
-import * as iam from '@aws-cdk/aws-iam';
-import * as lambda from '@aws-cdk/aws-lambda';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as ssm from '@aws-cdk/aws-ssm';
-import * as cdk from '@aws-cdk/core';
+import {
+  aws_codepipeline as codePipeline,
+  aws_events_targets as targets,
+  aws_iam as iam,
+  aws_lambda as lambda,
+  aws_s3 as s3,
+  aws_ssm as ssm,
+} from 'aws-cdk-lib';
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from 'constructs';
 
 export interface Notification {
   /**
@@ -54,12 +57,12 @@ export interface CodePipelineBadgeNotificationProps {
   readonly notification?: Notification;
 }
 
-export class CodePipelineBadgeNotification extends cdk.Construct {
+export class CodePipelineBadgeNotification extends Construct {
   badgeUrl: string = '';
   codePipelineLink: string = '';
 
   constructor(
-    scope: cdk.Construct,
+    scope: Construct,
     id: string,
     props: CodePipelineBadgeNotificationProps
   ) {
@@ -205,7 +208,7 @@ export class CodePipelineBadgeNotification extends cdk.Construct {
     return lambdaFunc;
   }
 
-  private tagResource(scope: cdk.Construct): void {
+  private tagResource(scope: Construct): void {
     cdk.Tags.of(scope).add('CDK-CfnStackId', cdk.Aws.STACK_ID);
     cdk.Tags.of(scope).add('CDK-CfnStackName', cdk.Aws.STACK_NAME);
   }

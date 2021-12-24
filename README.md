@@ -15,6 +15,29 @@
   - Google Chat
   - Telegram
 
+## Support CDKv1 and CDKv2
+
+#### CDKv2
+
+```
+npm install cdk-codepipeline-badge-notification
+or
+npm install cdk-codepipeline-badge-notification@latest
+or
+npm install cdk-codepipeline-badge-notification@^2.0.0
+```
+
+
+#### CDKv1
+
+```
+npm install cdk-codepipeline-badge-notification@cdkv1 
+or
+npm install cdk-codepipeline-badge-notification@^0.2.67
+```
+
+
+
 ## Usage
 
 ```ts
