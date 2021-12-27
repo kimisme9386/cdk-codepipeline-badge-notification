@@ -14,7 +14,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   majorVersion: 2,
   defaultReleaseBranch: 'main',
   releaseBranches: {
-    cdkv1: { npmDistTag: 'cdkv1', majorVersion: 0 },
+    cdkv1: { npmDistTag: 'cdkv1', majorVersion: 1 },
   },
   workflowNodeVersion: '14.17.0',
   keywords: ['aws', 'cdk', 'codepipeline', 'badge', 'notification'],
