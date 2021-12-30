@@ -19,7 +19,8 @@ RUN sudo chmod +x ./.gitpod/oh-my-zsh.sh && ./.gitpod/oh-my-zsh.sh
 RUN npm i -g aws-cdk && \
   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \ 
   unzip awscliv2.zip && \
-  sudo ./aws/install
+  sudo ./aws/install \
+  sudo apt-get install -y rsync
 
 # start zsh
 CMD ["zsh"]
