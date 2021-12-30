@@ -5,8 +5,6 @@ const {
   JsonFile,
 } = require('projen');
 
-const AUTOMATION_TOKEN = 'PROJEN_GITHUB_TOKEN';
-
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Chris Yang',
   authorUrl: 'https://9incloud.com/',
@@ -38,7 +36,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   depsUpgradeOptions: {
     workflowOptions: {
       labels: ['auto-approve'],
-      secret: AUTOMATION_TOKEN,
     },
     ignoreProjen: false,
   },
