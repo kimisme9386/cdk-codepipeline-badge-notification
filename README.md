@@ -33,7 +33,7 @@ npm install cdk-codepipeline-badge-notification@^2.0.0
 ```
 npm install cdk-codepipeline-badge-notification@cdkv1 
 or
-npm install cdk-codepipeline-badge-notification@^0.2.67
+npm install cdk-codepipeline-badge-notification@^1.0.6
 ```
 
 
