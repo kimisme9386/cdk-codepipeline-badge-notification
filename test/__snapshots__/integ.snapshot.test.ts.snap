@@ -692,6 +692,53 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Retain",
     },
+    "TestPipelineArtifactsBucketPolicy5FA57B5E": Object {
+      "Properties": Object {
+        "Bucket": Object {
+          "Ref": "TestPipelineArtifactsBucketCC233C59",
+        },
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "s3:*",
+              "Condition": Object {
+                "Bool": Object {
+                  "aws:SecureTransport": "false",
+                },
+              },
+              "Effect": "Deny",
+              "Principal": Object {
+                "AWS": "*",
+              },
+              "Resource": Array [
+                Object {
+                  "Fn::GetAtt": Array [
+                    "TestPipelineArtifactsBucketCC233C59",
+                    "Arn",
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      Object {
+                        "Fn::GetAtt": Array [
+                          "TestPipelineArtifactsBucketCC233C59",
+                          "Arn",
+                        ],
+                      },
+                      "/*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::S3::BucketPolicy",
+    },
     "TestPipelineBuildAWSCodeBuildCodePipelineActionRole282E5B8E": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
