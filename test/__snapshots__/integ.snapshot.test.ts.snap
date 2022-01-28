@@ -1077,7 +1077,10 @@ Object {
               ],
             },
             Object {
-              "Action": "s3:PutObjectAcl",
+              "Action": Array [
+                "s3:PutObjectAcl",
+                "s3:PutObjectVersionAcl",
+              ],
               "Effect": "Allow",
               "Resource": Object {
                 "Fn::Join": Array [
